@@ -1,0 +1,75 @@
+/*
+Note: This file showcases the default theme. It works with the globals.css file to provide the theme for the application.
+
+Use the documentation located in /docs to learn more about the theme system.
+
+https://uicolors.app/create is a great resource for creating color palettes for TailwindCSS.
+
+This default theme contains a light mode and dark mode.
+Dark mode is set by the Tailwind Configuration.
+*/
+
+@tailwind base;
+
+@layer base {
+
+    /* Default Light Mode */
+    html {
+        /* Primary Colors */
+        --primary-color-950: #080808;
+        --primary-color-900: #1c1c1c;
+        --primary-color-800: #242424;
+        --primary-color-700: #303030;
+        --primary-color-600: #454545;
+        --primary-color-500: #5c5c5c;
+        --primary-color-400: #787878;
+        --primary-color-300: #9c9c9c;
+        --primary-color-200: #bababa;
+        --primary-color-100: #cfcfcf;
+        --primary-color-50: #ffffff;
+
+        /* Secondary Colors */
+        --secondary-color-950: #292929;
+        --secondary-color-900: #3d3d3d;
+        --secondary-color-800: #454545;
+        --secondary-color-700: #525252;
+        --secondary-color-600: #666666;
+        --secondary-color-500: #7d7d7d;
+        --secondary-color-400: #999999;
+        --secondary-color-300: #bdbdbd;
+        --secondary-color-200: #dbdbdb;
+        --secondary-color-100: #f0f0f0;
+        --secondary-color-50: #ffffff;
+    }
+
+    /* Default Dark Mode */
+    @media (prefers-color-scheme: dark) {
+        html {
+            /* Primary Colors */
+            --primary-color-950: #080808;
+            --primary-color-900: #1c1c1c;
+            --primary-color-800: #242424;
+            --primary-color-700: #303030;
+            --primary-color-600: #454545;
+            --primary-color-500: #5c5c5c;
+            --primary-color-400: #787878;
+            --primary-color-300: #9c9c9c;
+            --primary-color-200: #bababa;
+            --primary-color-100: #cfcfcf;
+            --primary-color-50: #ffffff;
+
+            /* Secondary Colors */
+            --secondary-color-950: #292929;
+            --secondary-color-900: #3d3d3d;
+            --secondary-color-800: #454545;
+            --secondary-color-700: #525252;
+            --secondary-color-600: #666666;
+            --secondary-color-500: #7d7d7d;
+            --secondary-color-400: #999999;
+            --secondary-color-300: #bdbdbd;
+            --secondary-color-200: #dbdbdb;
+            --secondary-color-100: #f0f0f0;
+            --secondary-color-50: #ffffff;
+        }
+    }
+}

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "../themes/default.css";
+@import "../themes/tokyo.css";
+@import "../themes/midnight.css";

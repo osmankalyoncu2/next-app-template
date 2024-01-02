@@ -1,10 +1,56 @@
+<h1 align="center">
+  Make Next App
+</h1>
 
+<p align="center">
+  A template for quickly building Next.js apps.
+</p>
+
+<p align="center">
+  Get started by following the <a href="#setup">setup</a>.
+</p>
+
+---
+
+(A preview of the template will be added soon)
+
+---
 
 ## Getting Started
 
-This template uses Supabase, Stripe, Resend, Payload CMS, Next Auth, and Next.js. It is a full stack template that can be used to build a SaaS application.
+This template uses Supabase, Stripe, Resend, Next Auth, OpenAI, and Next.js. It is a full stack template that can be used to build a SaaS application.
 
+This template has support for these payment types:
+- One-time payments
+- Subscriptions
+- Usage-based billing
+- Donations
 
+## Setup
+
+To get started with using Next App Template, you need to do the following:
+
+1. Download the [latest release](https://github.com/arsenstorm/next-app-template/releases/latest) (or clone this repo if you want to contribute).
+
+2. Extract and open the folder in your favourite code editor.
+
+3. Run `npm install` to install all the dependencies.
+
+> Alternatively, you can use any other package manager like `yarn` or `pnpm`.
+
+4. You’ll need to create a `.env.local` file in the root of the project and set some environment variables.
+
+5. Run `npm run dev` to start the development server.
+
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+7. To deploy your project to Vercel or Netlify, follow the [deployment instructions](#deployment).
+
+## What’s OpenAI used for?
+
+This template uses OpenAI for a Search feature that allows a user to search for stuff in your app.
+
+Generally, it’s really useful for most use-cases so it was added as a default feature to showcase how you can implement it.
 
 ### Supabase Setup
 
@@ -122,3 +168,13 @@ GRANT ALL ON TABLE next_auth.verification_tokens TO service_role;
 ### Stripe Setup
 
 First of all, I favour using Stripe Payment Intents over Stripe Checkout as it gives you more control.
+
+## Tips & Tricks
+
+1. For large products, it’s best to keep your marketing/landing pages separate from your app, but for a small solution, use the same app. This will save you time!
+
+## Deployment
+
+### Vercel
+
+### Netlify

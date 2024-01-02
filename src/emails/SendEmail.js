@@ -23,8 +23,9 @@ export default async function SendEmail({
 
     try {
         const response = await resend.emails.send({
-            from: from,
+            //from: from,
             to: to,
+            from: "Acme <onboarding@resend.dev>",
             subject: subject,
             react: ReactTemplate(data),
             headers: {
