@@ -13,12 +13,14 @@ import { usePathname } from 'next/navigation';
 import { classNames } from '@/lib/utils/classNames';
 import { AppCustomisation } from '@/lib/app/customisation';
 import Search from '@/components/SearchBar';
+import deviceType from '@/lib/utils/deviceType';
 
 export default function NavigationProvider({
     children
 }) {
     const [open, setOpen] = useState(false);
     const [openSearchBar, setOpenSearchBar] = useState(false);
+    const [DeviceType, setDeviceType] = useState('unknown');
     const pathname = usePathname();
     const navigation = AppCustomisation.navigation;
 
@@ -27,6 +29,10 @@ export default function NavigationProvider({
             setOpen(false);
         }
     }, [pathname]);
+
+    useEffect(() => {
+        setDeviceType(deviceType());
+    }, []);
 
     return (
         <>
@@ -199,8 +205,8 @@ export default function NavigationProvider({
                         <div className="flex h-16 items-center gap-x-4 bg-transparent px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
                             <img
                                 className="h-8 w-auto lg:hidden"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                alt="Your Company"
+                                src={AppCustomisation.branding.logos.mini.src}
+                                alt={AppCustomisation.branding.logos.mini.alt}
                             />
 
                             {/* Separator */}
@@ -225,8 +231,25 @@ export default function NavigationProvider({
                                             setOpenSearchBar(true);
                                         }}
                                     >
-                                        <span>
-                                            Search...
+                                        <span
+                                            className='text-primary-200 rounded-md bg-primary-900 px-2 py-1 text-xs font-bold border border-primary-800'
+                                        >
+                                            {
+                                                DeviceType === 'windows'
+                                                    ? 'Ctrl+K'
+                                                    : DeviceType === 'mac'
+                                                        ? '⌘+K'
+                                                        : 'Search...'
+                                            }
+                                        </span>
+                                        <span
+                                            className='ml-2'
+                                        >
+                                            {
+                                                DeviceType === 'windows' || DeviceType === 'mac'
+                                                    ? 'Search for anything...'
+                                                    : ''
+                                            }
                                         </span>
                                     </div>
                                 </div>

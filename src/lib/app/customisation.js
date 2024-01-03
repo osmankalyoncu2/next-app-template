@@ -2,7 +2,8 @@
 
 import {
     HomeIcon,
-    QuestionMarkCircleIcon
+    QuestionMarkCircleIcon,
+    KeyIcon
 } from '@heroicons/react/16/solid'
 
 export const AppCustomisation = {
@@ -31,6 +32,12 @@ export const AppCustomisation = {
             keywords: ['home', 'dashboard'],
             href: '/dashboard',
             icon: HomeIcon
+        },
+        {
+            name: 'API Keys',
+            keywords: ['api', 'keys', 'tokens'],
+            href: '/keys',
+            icon: KeyIcon
         },
         {
             name: 'Help',

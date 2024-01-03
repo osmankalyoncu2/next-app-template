@@ -27,6 +27,16 @@ export default function Search({
                     item.keywords.some(keyword => keyword.toLowerCase().includes(queryLower));
             });
 
+    // if the user presses ctrl+k or cmd+k, open the search bar
+    if (typeof window !== "undefined") {
+        window.addEventListener("keydown", (event) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === "k") {
+                event.preventDefault();
+                setOpen(true);
+            }
+        });
+    }
+
     return (
         <Transition.Root
             show={open}
