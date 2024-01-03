@@ -1,27 +1,27 @@
-html[data-theme="tokyo"] {
-    /* Primary Colors */
-    --primary-color-950: #080808;
-    --primary-color-900: #1c1c1c;
-    --primary-color-800: #242424;
-    --primary-color-700: #303030;
-    --primary-color-600: #454545;
-    --primary-color-500: #5c5c5c;
-    --primary-color-400: #787878;
-    --primary-color-300: #9c9c9c;
-    --primary-color-200: #bababa;
-    --primary-color-100: #cfcfcf;
-    --primary-color-50: #ffffff;
+:root[data-theme="tokyo"] {
+    /* Primary Colors - inspired by Tokyo's neon lights and urban landscape */
+    --primary-color-950: #0a0a0a; /* Dark Asphalt */
+    --primary-color-900: #1a1a1a; /* City Night */
+    --primary-color-800: #333333; /* Urban Shadow */
+    --primary-color-700: #4d4d4d; /* Metropolitan Gray */
+    --primary-color-600: #666666; /* Concrete Jungle */
+    --primary-color-500: #808080; /* Silvered Streets */
+    --primary-color-400: #999999; /* Skyline Silver */
+    --primary-color-300: #b3b3b3; /* Moonlit City */
+    --primary-color-200: #cccccc; /* Tokyo Dawn */
+    --primary-color-100: #e6e6e6; /* Morning Mist */
+    --primary-color-50: #f2f2f2; /* Sakura White */
 
-    /* Secondary Colors */
-    --secondary-color-950: #292929;
-    --secondary-color-900: #3d3d3d;
-    --secondary-color-800: #454545;
-    --secondary-color-700: #525252;
-    --secondary-color-600: #666666;
-    --secondary-color-500: #7d7d7d;
-    --secondary-color-400: #999999;
-    --secondary-color-300: #bdbdbd;
-    --secondary-color-200: #dbdbdb;
-    --secondary-color-100: #f0f0f0;
-    --secondary-color-50: #ffffff;
+    /* Secondary Colors - inspired by the vibrancy of Tokyo's culture */
+    --secondary-color-950: #ff00ff; /* Neon Pink */
+    --secondary-color-900: #ff69b4; /* Cherry Blossom */
+    --secondary-color-800: #ff4500; /* Temple Orange */
+    --secondary-color-700: #ffd700; /* Golden Ginkgo */
+    --secondary-color-600: #00ff00; /* Bamboo Green */
+    --secondary-color-500: #40e0d0; /* Tokyo Bay Blue */
+    --secondary-color-400: #1e90ff; /* Sumida River */
+    --secondary-color-300: #0000ff; /* Midnight Indigo */
+    --secondary-color-200: #800080; /* Imperial Purple */
+    --secondary-color-100: #ff6347; /* Sushi Salmon */
+    --secondary-color-50: #ffff00; /* Shinjuku Gold */
 }

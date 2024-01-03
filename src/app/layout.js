@@ -5,6 +5,12 @@ import '@/styles/globals.css'
 // Authentication
 import NextAuthProvider from '@/security/NextAuthProvider'
 
+// Theming
+import ThemeProvider from '@/lib/theme/ThemeProvider'
+
+// Navigation
+import NavigationProvider from '@/navigation/NavigationProvider'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -19,9 +25,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <NextAuthProvider>
-        <body className={inter.className}>
-          {children}
-        </body>
+        <ThemeProvider>
+          <body className={inter.className + " " + "bg-primary-950"}>
+            <NavigationProvider>
+              {children}
+            </NavigationProvider>
+          </body>
+        </ThemeProvider>
       </NextAuthProvider>
     </html>
   )

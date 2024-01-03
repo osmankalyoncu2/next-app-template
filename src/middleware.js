@@ -12,7 +12,9 @@ import {
 // See more details at https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 const restrictedPathnames = [
     '/welcome',
-    '/dashboard'
+    '/dashboard',
+    '/settings',
+    '/settings/:path*',
 ]
 const adminPathnames = [
     '/admin'
@@ -56,6 +58,8 @@ export default withAuth(
     }
 );
 
+const matcher = restrictedPathnames.concat(adminPathnames)
+
 export const config = {
-    matcher: restrictedPathnames.concat(adminPathnames)
+    matcher: matcher,
 }

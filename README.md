@@ -48,9 +48,9 @@ To get started with using Next App Template, you need to do the following:
 
 ## What’s OpenAI used for?
 
-This template uses OpenAI for a Search feature that allows a user to search for stuff in your app.
+This template uses OpenAI for a Support feature that allows a user to search for help using documentation available in your app.
 
-Generally, it’s really useful for most use-cases so it was added as a default feature to showcase how you can implement it.
+Generally, it’s really useful for many use-cases so it was added as a default feature to showcase how you can implement it.
 
 ### Supabase Setup
 

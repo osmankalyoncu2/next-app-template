@@ -16,30 +16,30 @@ Dark mode is set by the Tailwind Configuration.
     /* Default Light Mode */
     html {
         /* Primary Colors */
-        --primary-color-950: #080808;
-        --primary-color-900: #1c1c1c;
-        --primary-color-800: #242424;
-        --primary-color-700: #303030;
-        --primary-color-600: #454545;
+        --primary-color-950: #ffffff;
+        --primary-color-900: #cfcfcf;
+        --primary-color-800: #bababa;
+        --primary-color-700: #9c9c9c;
+        --primary-color-600: #787878;
         --primary-color-500: #5c5c5c;
-        --primary-color-400: #787878;
-        --primary-color-300: #9c9c9c;
-        --primary-color-200: #bababa;
-        --primary-color-100: #cfcfcf;
-        --primary-color-50: #ffffff;
+        --primary-color-400: #454545;
+        --primary-color-300: #303030;
+        --primary-color-200: #242424;
+        --primary-color-100: #1c1c1c;
+        --primary-color-50: #080808;
 
         /* Secondary Colors */
-        --secondary-color-950: #292929;
-        --secondary-color-900: #3d3d3d;
-        --secondary-color-800: #454545;
-        --secondary-color-700: #525252;
-        --secondary-color-600: #666666;
+        --secondary-color-950: #ffffff;
+        --secondary-color-900: #f0f0f0;
+        --secondary-color-800: #dbdbdb;
+        --secondary-color-700: #bdbdbd;
+        --secondary-color-600: #999999;
         --secondary-color-500: #7d7d7d;
-        --secondary-color-400: #999999;
-        --secondary-color-300: #bdbdbd;
-        --secondary-color-200: #dbdbdb;
-        --secondary-color-100: #f0f0f0;
-        --secondary-color-50: #ffffff;
+        --secondary-color-400: #666666;
+        --secondary-color-300: #525252;
+        --secondary-color-200: #454545;
+        --secondary-color-100: #3d3d3d;
+        --secondary-color-50: #080808;
     }
 
     /* Default Dark Mode */

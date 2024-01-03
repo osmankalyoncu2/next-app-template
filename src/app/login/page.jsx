@@ -12,6 +12,9 @@ import { useRouter } from "next/navigation";
 // Authentication
 import { submitForm } from "@/lib/auth/submitForm";
 import { useSession, getProviders, getCsrfToken } from "next-auth/react"
+import TextInput from "@/components/Input";
+import Button from "@/components/Button";
+import Spinner from "@/components/Loader";
 
 export default function SignIn() {
     const { data: session, status } = useSession();
@@ -105,38 +108,28 @@ export default function SignIn() {
                 >
                     <input name="token" type="hidden" defaultValue={token} />
 
-                    <label
-                        className="text-neutral-400 text-sm mb-2 w-full"
-                        htmlFor="email"
-                    >
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        className="bg-primary-700 border-neutral-600 outline-none focus-visible:outline-none ring-0 focus-visible:ring-2 focus-visible:ring-primary-500 rounded-md shadow-xl px-2 py-2 flex flex-col justify-center items-center text-primary-50 w-full placeholder-primary-200 mb-4 text-sm transition duration-200 ease-in-out"
+                    <TextInput
+                        label="Email"
                         id="email"
+                        type="email"
                         name="email"
+                        className="w-full mb-4"
                         placeholder="arsen@makenext.app"
                         onChange={handleEmailChange}
                     />
 
-                    <button
+                    <Button
                         id="submitBtn"
                         type="submit"
-                        className="border border-transparent relative w-full bg-primary-50 rounded-md px-2 py-2 hover:bg-primary-100 transition duration-200 ease-in-out flex flex-row justify-center items-center text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-75"
+                        className="relative w-full bg-primary-50 text-primary-950 px-2 py-2 hover:bg-primary-100 flex flex-row justify-center items-center"
                         disabled={email === "" || loading}
                     >
-                        {loading && (
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                        )}
+                        {loading && <Spinner />}
                         Continue
                         <ArrowRightIcon
                             className="inline-block size-5 ml-1"
                         />
-                    </button>
+                    </Button>
                 </form>
                 <SocialLoginProviders
                     csrfToken={token}
@@ -203,19 +196,16 @@ function SocialLoginProviders({
                             action={`/api/auth/signin/${provider.id}`}
                         >
                             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                            <button
+                            <Button
                                 type="submit"
                                 disabled={clicked}
-                                className="relative bg-primary-700 border border-primary-600 rounded-md shadow-xl px-2 py-2 flex flex-row justify-center items-center text-primary-50 w-full placeholder-primary-200 text-sm transition duration-200 ease-in-out disabled:cursor-not-allowed disabled:opacity-75"
+                                className="relative bg-primary-700 border-primary-600 px-2 py-2 flex flex-row justify-center items-center text-primary-50 w-full"
                             >
                                 {clicked && (
                                     <div
                                         className="absolute inset-0 flex items-center justify-center w-full h-full"
                                     >
-                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
+                                        <Spinner />
                                     </div>
                                 )}
                                 <div
@@ -233,7 +223,7 @@ function SocialLoginProviders({
                                         Login with {provider.name}
                                     </span>
                                 </div>
-                            </button>
+                            </Button>
                         </form>
                     )
                 })}
