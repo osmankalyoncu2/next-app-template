@@ -7,9 +7,12 @@ import {
     getTheme,
 } from '@/lib/theme/themeManager'
 import { useEffect, useState } from "react";
+import {
+    AppCustomisation
+} from "@/lib/app/customisation";
 
 export default function ThemeSwitcher({
-    themes = []
+    themes = AppCustomisation.branding.themes
 }) {
     const [currentTheme, setCurrentTheme] = useState(null);
 
