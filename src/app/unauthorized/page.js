@@ -12,7 +12,7 @@ import {
 export default function Unauthorized() {
     return (
         <main
-            className="bg-primary-950 h-screen w-screen relative"
+            className="absolute top-0 left-0 bg-primary-950 h-screen w-screen z-50"
         >
             <div
                 className="absolute top-6 left-6 bg-primary-950"

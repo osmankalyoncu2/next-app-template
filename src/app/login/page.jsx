@@ -57,7 +57,7 @@ export default function SignIn() {
 
     return (
         <main
-            className="bg-primary-950 h-screen w-screen relative"
+            className="bg-primary-950 h-screen w-screen absolute top-0 left-0 z-50"
         >
             <div
                 className="absolute top-6 left-6 bg-primary-950"
