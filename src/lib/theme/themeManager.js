@@ -5,15 +5,20 @@ export const switchTheme = (theme) => {
 };
 
 export const resolveTheme = () => {
-    if (typeof window === "undefined") return;
-    const theme = window.localStorage.getItem("theme");
+    const theme = getTheme();
     if (theme) {
         switchTheme(theme);
     }
+    return theme;
 };
 
 export const resetTheme = () => {
     if (typeof window === "undefined") return;
     window.localStorage.removeItem("theme");
     document.querySelector(":root")?.removeAttribute("data-theme");
+};
+
+export const getTheme = () => {
+    if (typeof window === "undefined") return;
+    return window.localStorage.getItem("theme");
 };

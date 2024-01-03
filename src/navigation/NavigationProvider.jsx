@@ -12,15 +12,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { classNames } from '@/lib/utils/classNames';
 import { AppCustomisation } from '@/lib/app/customisation';
+import Search from '@/components/SearchBar';
 
 export default function NavigationProvider({
     children
 }) {
     const [open, setOpen] = useState(false);
+    const [openSearchBar, setOpenSearchBar] = useState(false);
     const pathname = usePathname();
     const navigation = AppCustomisation.navigation;
-
-    const current = navigation.find((item) => item.href === pathname);
 
     useEffect(() => {
         if (open) {
@@ -30,6 +30,7 @@ export default function NavigationProvider({
 
     return (
         <>
+            <Search open={openSearchBar} setOpen={setOpenSearchBar} items={navigation} />
             <div>
                 <Transition.Root show={open} as={Fragment}>
                     <Dialog as="div" className="relative z-50 lg:hidden" onClose={setOpen}>
@@ -76,38 +77,41 @@ export default function NavigationProvider({
                                         <div className="flex h-16 shrink-0 items-center">
                                             <img
                                                 className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                                alt="Your Company"
+                                                src={AppCustomisation.branding.logos.mini.src}
+                                                alt={AppCustomisation.branding.logos.mini.alt}
                                             />
                                         </div>
                                         <nav className="flex flex-1 flex-col">
                                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                                 <li>
                                                     <ul role="list" className="-mx-2 space-y-1">
-                                                        {navigation.map((item) => (
-                                                            <li key={item.name}>
-                                                                <Link
-                                                                    href={item.href}
-                                                                    className={classNames(
-                                                                        item.href === pathname
-                                                                            ? 'bg-primary-800 text-primary-50'
-                                                                            : 'text-primary-200 hover:text-primary-50 hover:bg-primary-800',
-                                                                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                                                    )}
-                                                                >
-                                                                    <item.icon
+                                                        {navigation.map((item) => {
+                                                            if (item.no_display) return;
+                                                            return (
+                                                                <li key={item.name}>
+                                                                    <Link
+                                                                        href={item.href}
                                                                         className={classNames(
                                                                             item.href === pathname
-                                                                                ? 'text-primary-50'
-                                                                                : 'text-primary-200 group-hover:text-primary-50',
-                                                                            'h-6 w-6 shrink-0'
+                                                                                ? 'bg-primary-800 text-primary-50'
+                                                                                : 'text-primary-200 hover:text-primary-50 hover:bg-primary-800',
+                                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                                         )}
-                                                                        aria-hidden="true"
-                                                                    />
-                                                                    {item.name}
-                                                                </Link>
-                                                            </li>
-                                                        ))}
+                                                                    >
+                                                                        <item.icon
+                                                                            className={classNames(
+                                                                                item.href === pathname
+                                                                                    ? 'text-primary-50'
+                                                                                    : 'text-primary-200 group-hover:text-primary-50',
+                                                                                'h-6 w-6 shrink-0'
+                                                                            )}
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                        {item.name}
+                                                                    </Link>
+                                                                </li>
+                                                            )
+                                                        })}
                                                     </ul>
                                                 </li>
                                                 <li className="mt-auto">
@@ -136,47 +140,50 @@ export default function NavigationProvider({
                         <div className="flex h-16 shrink-0 items-center">
                             <img
                                 className="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                alt="Your Company"
+                                src={AppCustomisation.branding.logos.mini.src}
+                                alt={AppCustomisation.branding.logos.mini.alt}
                             />
                         </div>
                         <nav className="flex flex-1 flex-col">
                             <ul role="list" className="flex flex-1 flex-col gap-y-7">
                                 <li>
                                     <ul role="list" className="-mx-2 space-y-2">
-                                        {navigation.map((item) => (
-                                            <li key={item.name}>
-                                                <a
-                                                    href={item.href}
-                                                    className={classNames(
-                                                        item.href === pathname
-                                                            ? 'bg-primary-800 text-primary-50'
-                                                            : 'text-primary-200 hover:text-primary-50 hover:bg-primary-800',
-                                                        'group flex justify-start items-center gap-x-2 rounded-md px-2 py-1 text-sm leading-6 transition duration-200 ease-in-out'
-                                                    )}
-                                                >
-                                                    <item.icon
+                                        {navigation.map((item) => {
+                                            if (item.no_display) return;
+                                            return (
+                                                <li key={item.name}>
+                                                    <Link
+                                                        href={item.href}
                                                         className={classNames(
                                                             item.href === pathname
-                                                                ? 'text-primary-50'
-                                                                : 'text-primary-200 group-hover:text-primary-50',
-                                                            'size-4 shrink-0'
+                                                                ? 'bg-primary-800 text-primary-50'
+                                                                : 'text-primary-200 hover:text-primary-50 hover:bg-primary-800',
+                                                            'group flex justify-start items-center gap-x-2 rounded-md px-2 py-1 text-sm leading-6 transition duration-200 ease-in-out'
                                                         )}
-                                                        aria-hidden="true"
-                                                    />
-                                                    {item.name}
-                                                </a>
-                                            </li>
-                                        ))}
+                                                    >
+                                                        <item.icon
+                                                            className={classNames(
+                                                                item.href === pathname
+                                                                    ? 'text-primary-50'
+                                                                    : 'text-primary-200 group-hover:text-primary-50',
+                                                                'size-4 shrink-0'
+                                                            )}
+                                                            aria-hidden="true"
+                                                        />
+                                                        {item.name}
+                                                    </Link>
+                                                </li>
+                                            )
+                                        })}
                                     </ul>
                                 </li>
                                 <li className="mt-auto">
                                     <Link
                                         href="/settings"
-                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-primary-200 hover:bg-primary-800 hover:text-primary-50 transition duration-200 ease-in-out"
+                                        className="group -mx-2 flex items-center gap-x-3 rounded-md px-2 py-1 text-sm font-semibold leading-6 text-primary-200 hover:bg-primary-800 hover:text-primary-50 transition duration-200 ease-in-out"
                                     >
                                         <Cog6ToothIcon
-                                            className="h-6 w-6 shrink-0 text-primary-200 group-hover:text-primary-50"
+                                            className="size-4 shrink-0 text-primary-200 group-hover:text-primary-50"
                                             aria-hidden="true"
                                         />
                                         Settings
@@ -200,7 +207,7 @@ export default function NavigationProvider({
                             <div className="h-6 w-px bg-primary-600 lg:hidden" aria-hidden="true" />
 
                             <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-                                <form className="relative flex flex-1" action="#" method="GET">
+                                <div className="relative flex flex-1 cursor-text">
                                     <label htmlFor="search-field" className="sr-only">
                                         Search
                                     </label>
@@ -208,14 +215,21 @@ export default function NavigationProvider({
                                         className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-primary-200"
                                         aria-hidden="true"
                                     />
-                                    <input
+                                    <div
                                         id="search-field"
-                                        className="block h-full w-full border-0 py-0 pl-8 pr-0 text-primary-50 placeholder:text-primary-200 focus:ring-0 sm:text-sm bg-transparent"
-                                        placeholder="Search..."
+                                        className="relative h-full w-full border-0 py-0 pl-8 pr-0 text-primary-50 placeholder:text-primary-200 focus:ring-0 sm:text-sm bg-transparent flex items-center"
                                         type="search"
                                         name="search"
-                                    />
-                                </form>
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setOpenSearchBar(true);
+                                        }}
+                                    >
+                                        <span>
+                                            Search...
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                             <button

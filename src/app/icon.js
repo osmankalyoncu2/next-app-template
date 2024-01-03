@@ -30,6 +30,7 @@ export default function Icon() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: 'white',
+                    textAlign: 'center',
                 }}
             >
                 N

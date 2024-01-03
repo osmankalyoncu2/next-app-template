@@ -2,6 +2,7 @@
 
 import {
     HomeIcon,
+    QuestionMarkCircleIcon
 } from '@heroicons/react/16/solid'
 
 export const AppCustomisation = {
@@ -10,27 +11,45 @@ export const AppCustomisation = {
         logos: {
             // Mini Logos are smaller logos that are used in the sidebar navigation.
             mini: {
-                src: '/make-next-app-mini-logo.svg',
+                src: '/icon',
                 alt: 'Make Next App Logo',
             },
             default: {
-                src: '/make-next-app-logo.svg',
+                src: '/icon',
                 alt: 'Make Next App Logo',
             }
-        }
+        },
+        themes: [
+            "default",
+            "midnight",
+            "tokyo"
+        ]
     },
     navigation: [
         {
             name: 'Dashboard',
+            keywords: ['home', 'dashboard'],
             href: '/dashboard',
-            icon: HomeIcon,
-            current: true
+            icon: HomeIcon
         },
+        {
+            name: 'Help',
+            keywords: ['help', 'support', 'contact'],
+            href: '/help',
+            icon: QuestionMarkCircleIcon
+        },
+        {
+            name: 'Settings',
+            keywords: ['settings', 'account', 'preferences'],
+            href: '/settings',
+            no_display: true // This value should be true to hide the navigation item.
+        }
     ],
     settings: {
         page: {
-            title: 'Settings',
-            subtitle: 'Manage your account settings.'
+            name: 'Settings',
+            href: '/settings',
+            subtext: 'Manage your account settings.'
         }
     }
 }
