@@ -58,5 +58,21 @@ export const AppCustomisation = {
             href: '/settings',
             subtext: 'Manage your account settings.'
         }
+    },
+    tools: {
+        // Intercom is a client component
+        intercom: {
+            enabled: false, // Override to disable Intercom
+            api_url: "https://api-iam.intercom.io",
+            app_id: "l44tyq2y", // If this is set, Intercom will be enabled unless `enabled` is set to false.
+        },
+        /*hotjar: {
+            enabled: false, // Override to disable Hotjar
+            hotjarId: "", // Required if `enabled` is set to true.
+        },
+        google_analytics: {
+            enabled: false, // Override to disable Google Analytics
+            id: "", // Must start with "G-" and is required if `enabled` is set to true.
+        },*/
     }
 }
