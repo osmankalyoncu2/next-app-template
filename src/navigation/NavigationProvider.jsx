@@ -101,7 +101,7 @@ export default function NavigationProvider({
                                                                             item.href === pathname
                                                                                 ? 'bg-primary-800 text-primary-50'
                                                                                 : 'text-primary-200 hover:text-primary-50 hover:bg-primary-800',
-                                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                                                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold transition duration-200 ease-in-out'
                                                                         )}
                                                                     >
                                                                         <item.icon
@@ -109,7 +109,7 @@ export default function NavigationProvider({
                                                                                 item.href === pathname
                                                                                     ? 'text-primary-50'
                                                                                     : 'text-primary-200 group-hover:text-primary-50',
-                                                                                'h-6 w-6 shrink-0'
+                                                                                'h-6 w-6 shrink-0 transition duration-200 ease-in-out'
                                                                             )}
                                                                             aria-hidden="true"
                                                                         />
@@ -123,10 +123,10 @@ export default function NavigationProvider({
                                                 <li className="mt-auto">
                                                     <Link
                                                         href="/settings"
-                                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-primary-200 hover:bg-primary-800 hover:text-primary-50"
+                                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-primary-200 hover:bg-primary-800 hover:text-primary-50 transition duration-200 ease-in-out"
                                                     >
                                                         <Cog6ToothIcon
-                                                            className="h-6 w-6 shrink-0 text-primary-200 group-hover:text-primary-50"
+                                                            className="h-6 w-6 shrink-0 text-primary-200 group-hover:text-primary-50 transition duration-200 ease-in-out"
                                                             aria-hidden="true"
                                                         />
                                                         Settings
@@ -172,7 +172,7 @@ export default function NavigationProvider({
                                                                 item.href === pathname
                                                                     ? 'text-primary-50'
                                                                     : 'text-primary-200 group-hover:text-primary-50',
-                                                                'size-4 shrink-0'
+                                                                'size-4 shrink-0 transition duration-200 ease-in-out'
                                                             )}
                                                             aria-hidden="true"
                                                         />
@@ -189,7 +189,7 @@ export default function NavigationProvider({
                                         className="group -mx-2 flex items-center gap-x-3 rounded-md px-2 py-1 text-sm font-semibold leading-6 text-primary-200 hover:bg-primary-800 hover:text-primary-50 transition duration-200 ease-in-out"
                                     >
                                         <Cog6ToothIcon
-                                            className="size-4 shrink-0 text-primary-200 group-hover:text-primary-50"
+                                            className="size-4 shrink-0 text-primary-200 group-hover:text-primary-50 transition duration-200 ease-in-out"
                                             aria-hidden="true"
                                         />
                                         Settings
