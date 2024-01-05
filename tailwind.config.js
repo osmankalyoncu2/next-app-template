@@ -41,7 +41,18 @@ module.exports = {
           900: 'rgba(var(--secondary-color-900) / <alpha-value>)',
           950: 'rgba(var(--secondary-color-950) / <alpha-value>)'
         },
-      }
+      },
+      padding: {
+        /*
+          The paddings below are used in the components found in /src/components
+          They are used to create consistent spacing between elements when you change the themes
+          TODO: Implement accessiblity themes
+        */
+        'size-x': 'var(--padding-size-x)',
+        'size-y': 'var(--padding-size-y)',
+        'smaller-size-x': 'var(--smaller-padding-size-x)',
+        'smaller-size-y': 'var(--smaller-padding-size-y)',
+      },
     },
   },
   plugins: [

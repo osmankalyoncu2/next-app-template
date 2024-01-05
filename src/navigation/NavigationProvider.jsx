@@ -6,6 +6,7 @@ import {
     Bars3Icon,
     Cog6ToothIcon,
     XMarkIcon,
+    CogIcon
 } from '@heroicons/react/16/solid'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
@@ -188,8 +189,8 @@ export default function NavigationProvider({
                                         href="/settings"
                                         className="group -mx-2 flex items-center gap-x-3 rounded-md px-2 py-1 text-sm font-semibold leading-6 text-primary-200 hover:bg-primary-800 hover:text-primary-50 transition duration-200 ease-in-out"
                                     >
-                                        <Cog6ToothIcon
-                                            className="size-4 shrink-0 text-primary-200 group-hover:text-primary-50 transition duration-200 ease-in-out"
+                                        <CogIcon
+                                            className="size-5 shrink-0 text-primary-200 group-hover:text-primary-50 transition duration-200 ease-in-out"
                                             aria-hidden="true"
                                         />
                                         Settings

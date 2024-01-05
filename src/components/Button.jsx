@@ -28,9 +28,9 @@ export default function Button({
     }
 
     if (smaller) {
-        size = "px-2 py-1";
+        size = "px-smaller-size-x py-smaller-size-y";
     } else {
-        size = "px-3 py-2";
+        size = "px-size-x py-size-y";
     }
 
     return (

@@ -5,4 +5,10 @@ const nextConfig = {
     reactStrictMode: false, // I don’t like strict mode
 }
 
-module.exports = withNextVideo(nextConfig)
+module.exports = withNextVideo(
+    // If you want to pass options to the video loader, you can do it here
+    {
+
+    },
+    nextConfig
+)

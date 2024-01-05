@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, createElement } from "react";
 import { Combobox, Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
@@ -105,19 +105,30 @@ export default function Search({
                                                         value={item}
                                                         className={({ active }) =>
                                                             classNames(
-                                                                "flex cursor-pointer select-none items-center rounded-md px-3 py-2",
+                                                                "flex cursor-pointer select-none items-center rounded-md px-3 py-2 transition duration-200 ease-in-out",
                                                                 active && "bg-primary-800/15 text-primary-50"
                                                             )
                                                         }
                                                     >
                                                         {({ active }) => (
                                                             <>
-                                                                <ArrowTopRightOnSquareIcon
-                                                                    className={classNames(
-                                                                        "size-6 flex-none text-primary-200"
-                                                                    )}
-                                                                    aria-hidden="true"
-                                                                />
+                                                                {item.icon ?
+                                                                    createElement(item.icon, {
+                                                                        className: classNames(
+                                                                            "size-6 flex-none text-primary-200 transition duration-200 ease-in-out",
+                                                                            active && "text-primary-50"
+                                                                        ),
+                                                                        'aria-hidden': true
+                                                                    })
+                                                                    :
+                                                                    <ArrowTopRightOnSquareIcon
+                                                                        className={classNames(
+                                                                            "size-6 flex-none text-primary-200 transition duration-200 ease-in-out",
+                                                                            active && "text-primary-50"
+                                                                        )}
+                                                                        aria-hidden="true"
+                                                                    />
+                                                                }
                                                                 <span className="ml-3 flex-auto truncate">
                                                                     {item.name}
                                                                 </span>

@@ -3,7 +3,8 @@
 import {
     HomeIcon,
     QuestionMarkCircleIcon,
-    KeyIcon
+    KeyIcon,
+    CogIcon
 } from '@heroicons/react/16/solid'
 
 export const AppCustomisation = {
@@ -49,7 +50,8 @@ export const AppCustomisation = {
             name: 'Settings',
             keywords: ['settings', 'account', 'preferences'],
             href: '/settings',
-            no_display: true // This value should be true to hide the navigation item.
+            no_display: true, // This value should be true to hide the navigation item.
+            icon: CogIcon,
         }
     ],
     settings: {

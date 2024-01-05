@@ -18,7 +18,6 @@ import Intercom from '@/lib/support/intercom'
 // Analytics
 import Hotjar from '@/lib/analytics/hotjar'
 import GoogleAnalytics from '@/lib/analytics/google-analytics'
-import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 

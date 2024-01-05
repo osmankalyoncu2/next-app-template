@@ -40,6 +40,12 @@ Dark mode is set by the Tailwind Configuration.
         --secondary-color-200: 69 69 69;
         --secondary-color-100: 61 61 61;
         --secondary-color-50: 8 8 8;
+
+        /* Padding Sizes */
+        --padding-size-x: 0.75rem; /* px-3 */
+        --padding-size-y: 0.5rem; /* py-2 */
+        --smaller-padding-size-x: 0.5rem; /* px-2 */
+        --smaller-padding-size-y: 0.25rem; /* py-1 */
     }
 
     /* Default Dark Mode */
