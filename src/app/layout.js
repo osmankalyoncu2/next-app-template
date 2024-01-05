@@ -10,9 +10,15 @@ import ThemeProvider from '@/lib/theme/ThemeProvider'
 
 // Navigation
 import NavigationProvider from '@/navigation/NavigationProvider'
+
+// Tools
+// Support
 import Intercom from '@/lib/support/intercom'
+
+// Analytics
 import Hotjar from '@/lib/analytics/hotjar'
 import GoogleAnalytics from '@/lib/analytics/google-analytics'
+import Head from 'next/head'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,15 +35,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <NextAuthProvider>
         <ThemeProvider>
+          {/* Other Stuff */}
+          <Intercom />
+          <Hotjar />
+          <GoogleAnalytics />
           <body className={inter.className + " " + "bg-primary-950"}>
             <NavigationProvider>
 
               {children}
             </NavigationProvider>
-            {/* Other Stuff */}
-            <Intercom />
-            <Hotjar />
-            <GoogleAnalytics />
           </body>
         </ThemeProvider>
       </NextAuthProvider>

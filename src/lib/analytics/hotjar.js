@@ -1,14 +1,20 @@
 // Hotjar
 
-import Script from "next/script";
+"use client";
 
-export default function Hotjar() {
+import Script from "next/script";
+import { AppCustomisation } from "../app/customisation";
+
+export default function Hotjar({
+    
+}) {
     // Alternatively, instead of setting an environment
     // variable, you can directly set the ID here.
-    const hotjarId = process.env.NEXT_PUBLIC_HOTJAR_ID; 
+    const hotjarId = AppCustomisation.tools.hotjar.hotjarId; 
+    const hotjar_enabled = AppCustomisation.tools.hotjar.enabled && (hotjarId !== "");
 
     // If no hotjarId is set, we won’t enable Hotjar.
-    if (!hotjarId) return null;
+    if (!hotjarId || !hotjar_enabled) return null;
 
     return (
         <Script strategy="lazyOnload" id="hotjar-script">

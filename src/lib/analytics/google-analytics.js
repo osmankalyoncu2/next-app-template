@@ -1,16 +1,20 @@
 // Google Analytics 4
 
+"use client";
+
 import Script from 'next/script'
+import { AppCustomisation } from '../app/customisation'
 
 export default function GoogleAnalytics({
 
 }) {
     // Alternatively, instead of setting an environment
     // variable, you can directly set the ID here.
-    const ga_id = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID; // Includes "G-" prefix
+    const ga_id = AppCustomisation.tools.google_analytics.ga_id; // Includes "G-" prefix
+    const ga_enabled = AppCustomisation.tools.google_analytics.enabled && (ga_id !== "");
 
     // If no hotjarId is set, we won’t enable Google Analytics Tracking.
-    if (!ga_id) return null;
+    if (!ga_id || !ga_enabled) return null;
 
     return (
         <>
