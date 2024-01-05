@@ -26,6 +26,20 @@ This template has support for these payment types:
 - Usage-based billing
 - Donations
 
+## Feature List
+
+- [x] Authentication via Next Auth
+- [x] Custom Themes (Only colours for now)
+- [ ] Themes for Accessibility (Colour blindness, font size, etc.)
+- [x] Google Analytics & Tag Manager
+- [x] Hotjar Support
+- [ ] Meta Pixel Tracking
+- [ ] Stripe Payments (One-time, Subscriptions, Usage-based billing, Donations)
+- [ ] Supabase Database (slowly getting there)
+- [x] Resend Email Sending
+- [ ] OpenAI
+
+
 ## Setup
 
 To get started with using Next App Template, you need to do the following:
