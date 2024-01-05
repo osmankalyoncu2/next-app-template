@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:video": "next dev & npx next-video sync -w",
+    "sync-video": "npx next-video sync -w",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -23,6 +25,7 @@
     "moment": "^2.30.1",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
+    "next-video": "^0.11.1",
     "openai": "^4.24.1",
     "react": "^18",
     "react-dom": "^18",
