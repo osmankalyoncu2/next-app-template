@@ -9,7 +9,6 @@ import {
     ArrowRightIcon
 } from '@heroicons/react/20/solid'
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 // Authentication
 import { submitForm } from "@/lib/auth/submitForm";
@@ -172,8 +171,11 @@ function SocialLoginProviders({
     providers
 }) {
     const provider_logos = "https://authjs.dev/img/providers/"; // {provider_id}.svg or {provider_id}-dark.svg
-    const router = useRouter();
-    const [clicked, setClicked] = useState(false);
+    const [clickedStates, setClickedStates] = useState({});
+
+    const handleClick = (providerId) => {
+        setClickedStates({ ...clickedStates, [providerId]: true });
+    };
 
     return (
         <>
@@ -191,7 +193,6 @@ function SocialLoginProviders({
                 className="grid grid-cols-2 w-full gap-4"
             >
                 {Object.values(providers).map((provider) => {
-                    const [clicked, setClicked] = useState(false);
                     if (provider.name === "Email") return null;
 
                     return (
@@ -199,14 +200,15 @@ function SocialLoginProviders({
                             key={provider.id}
                             method="POST"
                             action={`/api/auth/signin/${provider.id}`}
+                            onSubmit={() => handleClick(provider.id)}
                         >
                             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
                             <button
                                 type="submit"
-                                disabled={clicked}
+                                disabled={clickedStates[provider.id]}
                                 className="relative bg-primary-700 border border-primary-600 rounded-md shadow-xl px-2 py-2 flex flex-row justify-center items-center text-primary-50 w-full placeholder-primary-200 text-sm transition duration-200 ease-in-out disabled:cursor-not-allowed disabled:opacity-75"
                             >
-                                {clicked && (
+                                {clickedStates[provider.id] && (
                                     <div
                                         className="absolute inset-0 flex items-center justify-center w-full h-full"
                                     >
@@ -225,7 +227,7 @@ function SocialLoginProviders({
                                         src={provider_logos + provider.id + ".svg"}
                                     />
                                     <span className="ml-2 text-primary-200 font-semibold text-sm">
-                                        Login with {provider.name}
+                                        Signup with {provider.name}
                                     </span>
                                 </div>
                             </button>

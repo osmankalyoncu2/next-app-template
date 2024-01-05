@@ -10,8 +10,9 @@ export default function TextInput({
     smaller = false,
     ...props
 }) {
+    const temp_id = useId();
     if (!id) {
-        id = useId();
+        id = temp_id;
     }
 
     return (

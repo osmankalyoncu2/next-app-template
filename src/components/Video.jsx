@@ -1,4 +1,4 @@
-import Video from 'next-video';
+import NextVideo from 'next-video';
 
 export default function Video({
     src = null,
@@ -9,7 +9,7 @@ export default function Video({
     }
 
     return (
-        <Video
+        <NextVideo
             src={src}
             {...props}
         />

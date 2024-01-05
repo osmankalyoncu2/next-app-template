@@ -70,7 +70,14 @@ const Intercom = () => {
                 }
             }
         })();
-    }, [session, status]);
+    }, [
+        // This dependency array is kinda long
+        session,
+        status,
+        intercom_enabled,
+        api_base,
+        app_id
+    ]);
 
     return null;
 };

@@ -36,7 +36,10 @@ export default function ChangeEmailCard({
         } else {
             setEmailIsOkay(false);
         }
-    }, [newEmail]);
+    }, [
+        newEmail,
+        session?.user?.email
+    ]);
 
     return (
         <Card>

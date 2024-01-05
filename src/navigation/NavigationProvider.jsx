@@ -15,6 +15,7 @@ import { classNames } from '@/lib/utils/classNames';
 import { AppCustomisation } from '@/lib/app/customisation';
 import Search from '@/components/SearchBar';
 import deviceType from '@/lib/utils/deviceType';
+import Image from 'next/image';
 
 export default function NavigationProvider({
     children
@@ -26,9 +27,7 @@ export default function NavigationProvider({
     const navigation = AppCustomisation.navigation;
 
     useEffect(() => {
-        if (open) {
-            setOpen(false);
-        }
+        setOpen(false);
     }, [pathname]);
 
     useEffect(() => {
@@ -82,8 +81,10 @@ export default function NavigationProvider({
                                     </Transition.Child>
                                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary-950 px-6 pb-4 border-r border-primary-800">
                                         <div className="flex h-16 shrink-0 items-center">
-                                            <img
+                                            <Image
                                                 className="h-8 w-auto"
+                                                width={32}
+                                                height={32}
                                                 src={AppCustomisation.branding.logos.mini.src}
                                                 alt={AppCustomisation.branding.logos.mini.alt}
                                             />
@@ -145,8 +146,10 @@ export default function NavigationProvider({
                 <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col">
                     <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-primary-800 bg-transparent px-6 pb-4">
                         <div className="flex h-16 shrink-0 items-center">
-                            <img
+                            <Image
                                 className="h-8 w-auto"
+                                width={32}
+                                height={32}
                                 src={AppCustomisation.branding.logos.mini.src}
                                 alt={AppCustomisation.branding.logos.mini.alt}
                             />
@@ -204,8 +207,10 @@ export default function NavigationProvider({
                 <div className="lg:pl-64">
                     <div className="sticky top-0 z-40 lg:px-8 backdrop-blur-3xl bg-transparent border-b border-primary-800">
                         <div className="flex h-16 items-center gap-x-4 bg-transparent px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none">
-                            <img
+                            <Image
                                 className="h-8 w-auto lg:hidden"
+                                width={32}
+                                height={32}
                                 src={AppCustomisation.branding.logos.mini.src}
                                 alt={AppCustomisation.branding.logos.mini.alt}
                             />
