@@ -1,15 +1,15 @@
-// This is the page that gets displayed when a user who is logged in, but not an admin, tries to access an admin page.
-// If a user is not logged in, they will be redirected to the login page.
-
 export const metadata = {
-	title: "Unauthorized",
+	title: "Not Found",
 }
+
 import Link from "next/link";
 import {
 	ChevronLeftIcon
 } from "@heroicons/react/20/solid";
 
-export default function Unauthorized() {
+export default function FourOhFour({
+
+}) {
     return (
         <main
             className="bg-primary-950 h-screen w-screen z-50"
@@ -37,7 +37,7 @@ export default function Unauthorized() {
                     <h1
                         className="text-primary-50 text-xl font-semibold mb-2"
                     >
-                        You are not authorized to view this page.
+                        This page could not be found.
                     </h1>
                     <p
                         className="text-primary-200 text-base mb-4"

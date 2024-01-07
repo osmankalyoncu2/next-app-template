@@ -54,6 +54,9 @@ export const AppCustomisation = {
             icon: CogIcon,
         }
     ],
+    marketing_pages: {
+        "/pricing": "/pricing",
+    },
     settings: {
         page: {
             name: 'Settings',

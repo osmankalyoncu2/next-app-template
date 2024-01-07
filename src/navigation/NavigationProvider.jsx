@@ -34,6 +34,9 @@ export default function NavigationProvider({
         setDeviceType(deviceType());
     }, []);
 
+    // if the current path starts with the path of the navigation item, then display the navigation provider
+    if (!navigation.some((item) => pathname.startsWith(item.href))) return children;
+
     return (
         <>
             <Search open={openSearchBar} setOpen={setOpenSearchBar} items={navigation} />

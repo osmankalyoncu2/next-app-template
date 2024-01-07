@@ -40,7 +40,6 @@ export default function RootLayout({ children }) {
           <GoogleAnalytics />
           <body className={inter.className + " " + "bg-primary-950"}>
             <NavigationProvider>
-
               {children}
             </NavigationProvider>
           </body>

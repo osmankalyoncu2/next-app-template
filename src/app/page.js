@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, } from "next/navigation";
 import { useEffect } from "react";
 
 export default function LandingPage() {
@@ -12,9 +12,4 @@ export default function LandingPage() {
       redirect("/dashboard");
     }
   }, [status]);
-
-  return (
-    <>
-    </>
-  )
 }
