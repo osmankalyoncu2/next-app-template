@@ -27,6 +27,16 @@ export const metadata = {
     template: '%s | Next App Template',
   },
   description: 'Next App Template',
+  // If you need site verifications, add them here
+  verification: {
+    google: 'google_site_verification',
+    bing: 'bing_site_verification',
+    yandex: 'yandex_verification',
+    yahoo: 'yahoo_site_verification',
+    other: {
+      me: ['verification_name', 'verification_token'],
+    },
+  },
 }
 
 export default function RootLayout({ children }) {

@@ -5,21 +5,14 @@
 
 import { NextResponse } from 'next/server'
 
+// Stripe Library
 import { stripe } from '@/lib/stripe/stripe'
 
-import { createClient } from '@supabase/supabase-js'
-
-const supabase_options = {
-    db: {
-        schema: 'next_auth',
-    },
-}
-
-const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY,
-    supabase_options
-)
+// Database Connection
+import {
+    app_database,
+    next_auth_database,
+} from "@/lib/database/connect";
 
 export async function POST(req) {
     let event

@@ -8,7 +8,9 @@ import GitHubProvider from "next-auth/providers/github";
 
 // Supabase Adapter
 import { SupabaseAdapter } from "@auth/supabase-adapter"
-import { createClient } from '@supabase/supabase-js'
+
+// Database Connection
+import { next_auth_database } from "@/lib/database/connect";
 
 // Consistent Configuration for NextAuth & Middleware
 import {
@@ -17,20 +19,8 @@ import {
 
 import SendEmail from "@/emails/SendEmail";
 
-const supabase_options = {
-  db: {
-    schema: 'next_auth',
-  },
-}
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY,
-  supabase_options
-)
-
 async function fetchUserData(email) {
-  const { data, error } = await supabase
+  const { data, error } = await next_auth_database
     .from('users')
     .select('role')
     .eq('email', email)
