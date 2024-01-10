@@ -51,6 +51,9 @@ Dark mode is set by the Tailwind Configuration.
     /* Default Dark Mode */
     @media (prefers-color-scheme: dark) {
         :root {
+            /* Switch to dark color scheme for scroll bar */
+            color-scheme: dark;
+
             /* Primary Colors */
             --primary-color-950: 8 8 8;
             --primary-color-900: 28 28 28;
