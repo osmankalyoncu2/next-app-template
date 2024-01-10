@@ -33,7 +33,7 @@ This template has support for these payment types:
 - [ ] Themes for Accessibility (Colour blindness, font size, etc.)
 - [x] Google Analytics & Tag Manager
 - [x] Hotjar Support
-- [ ] Meta Pixel Tracking
+- [x] Meta Pixel Tracking
 - [ ] Stripe Payments (One-time, Subscriptions, Usage-based billing, Donations)
 - [ ] Supabase Database (slowly getting there)
 - [x] Resend Email Sending

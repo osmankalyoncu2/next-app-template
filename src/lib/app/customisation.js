@@ -78,5 +78,10 @@ export const AppCustomisation = {
             enabled: false, // Override to disable Google Analytics
             ga_id: "G-", // Must start with "G-" and is required if `enabled` is set to true.
         },
+        pixel: {
+            // Meta Pixel
+            enabled: false, // Override to disable Meta Pixel
+            pixelId: "", // Required if `enabled` is set to true.
+        }
     }
 }
