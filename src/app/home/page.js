@@ -38,6 +38,7 @@ export default function HomePage({
                         <Link
                             className="bg-white/5 ring-1 ring-white/10 px-4 py-2 rounded-full text-white hover:bg-white/10 transition-colors duration-200 ease-in-out"
                             href="https://github.com/arsenstorm/next-app-template"
+                            target="_blank"
                         >
                             View on GitHub
                         </Link>
