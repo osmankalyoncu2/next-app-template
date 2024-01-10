@@ -42,7 +42,7 @@ This template has support for these payment types:
 
 ## Setup
 
-To get started with using Next App Template, you need to do the following:
+To get started with using Make Next App, you need to do the following:
 
 1. Download the [latest release](https://github.com/arsenstorm/next-app-template/releases/latest) (or clone this repo if you want to contribute).
 

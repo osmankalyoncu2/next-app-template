@@ -1,4 +1,4 @@
-# Videos with Next App Template
+# Videos with Make Next App
 
 You may choose to use videos for your project for the purpose of helping users, showcasing features, or for marketing purposes.
 

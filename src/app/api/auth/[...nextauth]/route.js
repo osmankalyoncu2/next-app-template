@@ -60,7 +60,7 @@ const authOptions = {
         return SendEmail({
           to: email,
           from: null,
-          subject: `Sign in to Next App Template`,
+          subject: `Sign in to Make Next App`,
           ReactTemplate: () => (
             <>
               <p>

@@ -1,4 +1,4 @@
-# Analytics with Next App Template
+# Analytics with Make Next App
 
 Analytics are crucial in understanding user behaviour, improving UI/UX, and making informed decisions.
 

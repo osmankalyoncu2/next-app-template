@@ -1,2 +1,2 @@
-# Setting up Stripe to work with Next App Template
+# Setting up Stripe to work with Make Next App
 

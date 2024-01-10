@@ -10,7 +10,7 @@ export async function GET() {
     // then we save the data to our database so we can later display it on the admin dashboard
     // and use the data to make decisions on how to improve our app, onboard investors, etc.
 
-    // Learn more about this in the Next App Template Docs (/docs/analytics/Analytics.md)
+    // Learn more about this in the Make Next App Docs (/docs/analytics/Analytics.md)
 
     // one of the things we want to track is user count
     // we track user count by counting the number of users in our database

@@ -1,4 +1,4 @@
-# Early Fraud Warning in Next App Template
+# Early Fraud Warning in Make Next App
 
 Ocassionally, Stripe will send an early fraud warning to the webhook endpoint. This is a warning that the payment may be fraudulent.
 

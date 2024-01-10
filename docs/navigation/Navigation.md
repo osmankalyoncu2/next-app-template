@@ -1,4 +1,4 @@
-# Navigation in Next App Template
+# Navigation in Make Next App
 
 Navigation works as you’d expect it to in a Next.js app.
 

@@ -1,4 +1,4 @@
-name: Next App Template Analytics
+name: Make Next App Analytics
 
 on:
   workflow_dispatch:

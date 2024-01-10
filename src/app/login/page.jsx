@@ -81,7 +81,7 @@ export default function SignIn() {
                     <h1
                         className="text-primary-50 text-xl font-semibold mb-2"
                     >
-                        Log in to Next App Template
+                        Log in to Make Next App
                     </h1>
                     <p
                         className="text-primary-200 text-base mb-4"

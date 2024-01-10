@@ -23,10 +23,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: {
-    default: 'Next App Template',
-    template: '%s | Next App Template',
+    default: 'Make Next App',
+    template: '%s | Make Next App',
   },
-  description: 'Next App Template',
+  description: 'Make Next App',
   // If you need site verifications, add them here
   verification: {
     google: 'google_site_verification',
