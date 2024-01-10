@@ -34,7 +34,11 @@ This template has support for these payment types:
 - [x] Google Analytics & Tag Manager
 - [x] Hotjar Support
 - [x] Meta Pixel Tracking
-- [ ] Stripe Payments (One-time, Subscriptions, Usage-based billing, Donations)
+- [ ]  Stripe Payments:
+	- [ ] One-time
+ 	- [ ] Subscriptions
+  	- [ ] Usage-based billing
+  	- [ ] Donations
 - [ ] Supabase Database (slowly getting there)
 - [x] Resend Email Sending
 - [ ] OpenAI
