@@ -1,9 +1,8 @@
 import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
-//import Email from "next-auth/providers/email"
 
 // Send Email
-//import SendEmail from "@/emails/SendEmail";
+import SendEmail from "@/emails/SendEmail";
 
 // Database Connection
 import { next_auth_database } from "@/lib/database/connect";
@@ -63,14 +62,39 @@ export default {
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
         }),
-        /*Email({
-            sendVerificationRequest: ({
+
+        // Custom Email Provider
+        {
+            id: 'email',
+            name: 'Email',
+            type: 'email',
+            async sendVerificationRequest({
                 identifier: email,
                 url,
-            }) => {
-                const link = `${url}`;
-            },
-        }),*/
+            }) {
+                return SendEmail({
+                    to: email,
+                    from: null,
+                    subject: `Sign in to Make Next App`,
+                    ReactTemplate: () => (
+                        <>
+                            <p>
+                                Someone tried to sign in to your account from a new device.
+                            </p>
+                            <p>
+                                If this was you, please click the link below to verify your account.
+                            </p>
+                            <p>
+                                <a href={url}>{url}</a>
+                            </p>
+                            <p>
+                                If you did not request this, please ignore this email.
+                            </p>
+                        </>
+                    ),
+                })
+            }
+        }
     ],
     callbacks: {
         async session({ session, token }) {
