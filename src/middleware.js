@@ -1,5 +1,8 @@
 // This file is created to prevent a user accessing certain pages without proper authorization.
 
+export { auth as middleware } from "@/auth/auth"
+
+/*
 import {
     checkPathnamesValid,
     adminPathnames,
@@ -39,6 +42,7 @@ export default auth((req) => {
         return NextResponse.next()
     }
 })
+*/
 
 /*
  * Match all request paths except for the ones starting with:
