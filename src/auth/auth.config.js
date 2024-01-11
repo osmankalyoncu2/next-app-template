@@ -1,6 +1,6 @@
 import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
-import Email from "next-auth/providers/email"
+//import Email from "next-auth/providers/email"
 
 // Send Email
 //import SendEmail from "@/emails/SendEmail";
