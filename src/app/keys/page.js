@@ -1,4 +1,4 @@
-import Title from "@/components/Title";
+import Title from "@/components/ui/Title";
 
 export const metadata = {
     title: 'API Keys',

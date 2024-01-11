@@ -2,12 +2,13 @@ export const metadata = {
     title: "Settings",
 }
 
-import Heading from "@/components/Heading";
+import Heading from "@/components/ui/Heading";
 import ThemeSwitcher from "@/lib/theme/ThemeSwitcher";
 
 import ChangeEmailCard from "./ChangeEmailCard";
 import DeleteAccountCard from "./DeleteAccountCard";
 import SettingsTitle from "./SettingsTitle";
+import SignoutCard from "./SignoutCard";
 
 export default function SettingsPage({
 
@@ -21,6 +22,7 @@ export default function SettingsPage({
             <div
                 className="flex flex-col gap-4"
             >
+                <SignoutCard />
                 <ChangeEmailCard />
                 <DeleteAccountCard />
             </div>

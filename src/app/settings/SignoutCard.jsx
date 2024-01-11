@@ -3,31 +3,32 @@
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 
-export default function DeleteAccountCard({
+import { signOut } from "next-auth/react"
+
+export default function SignoutCard({
 
 }) {
     return (
         <Card>
             <h1 className="text-2xl text-primary-50">
-                Delete Account
+                Signout
             </h1>
             <p className="mt-2 text-sm text-primary-200">
-                Permanently remove your account and all of its data from our servers.
+                Keep your account extra secure by signing out after each session.
             </p>
             <Button
                 className="mt-4"
-                variant="danger"
-                smaller
                 onClick={async () => {
-                    console.warn("Not implemented yet.");
+                    console.warn("Signing out...");
                     await new Promise((resolve, reject) => {
                         setTimeout(() => {
+                            signOut({ callbackUrl: '/' })
                             resolve();
                         }, 2000);
                     });
                 }}
             >
-                Request Account Deletion
+                Sign me out &rarr;
             </Button>
         </Card>
     )

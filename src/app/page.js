@@ -1,15 +1,10 @@
-"use client";
+import { auth } from "@/auth/auth";
+import { redirect } from "next/navigation";
 
-import { useSession } from "next-auth/react";
-import { redirect, } from "next/navigation";
-import { useEffect } from "react";
+export default async function LandingPage() {
+  const session = await auth();
 
-export default function LandingPage() {
-  const { data: session, status } = useSession();
-  
-  useEffect(() => {
-    if (status === "authenticated") {
-      redirect("/dashboard");
-    }
-  }, [status]);
+  if (session && session.user) {
+    redirect("/dashboard");
+  }
 }

@@ -9,11 +9,11 @@ import {
 import Image from "next/image";
 
 // Authentication
-import { submitForm } from "@/lib/auth/submitForm";
+import { submitForm } from "@/auth/submitForm";
 import { useSession, getProviders, getCsrfToken } from "next-auth/react"
-import TextInput from "@/components/Input";
-import Button from "@/components/Button";
-import Spinner from "@/components/Loader";
+import TextInput from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
+import Spinner from "@/components/ui/Loader";
 
 export default function SignIn() {
     const { data: session, status } = useSession();

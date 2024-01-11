@@ -1,11 +1,9 @@
-"use client";
+import { auth } from "@/auth/auth";
 
-import { useSession } from "next-auth/react"
-
-export default function AdminAnalyticsPage({
+export default async function AdminAnalyticsPage({
 
 }) {
-    const { data: session, status } = useSession();
+    const session = await auth();
 
     return (
         <>

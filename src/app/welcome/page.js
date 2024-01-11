@@ -2,7 +2,7 @@ export const metadata = {
     title: "Welcome",
 }
 
-import Title from "@/components/Title"
+import Title from "@/components/ui/Title"
 
 export default function Welcome() {
     return (

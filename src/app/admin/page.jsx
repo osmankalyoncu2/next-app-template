@@ -1,17 +1,17 @@
-"use client";
+import Title from "@/components/ui/Title";
+import { auth } from "@/auth/auth";
 
-import { useSession } from "next-auth/react"
-
-export default function AdminPage({
+export default async function AdminPage({
 
 }) {
-    const { data: session, status } = useSession();
+    const session = await auth();
 
     return (
         <>
-            <h1>
-                Admin Page
-            </h1>
+            <Title
+                title={"Admin Page"}
+                subtitle={"Here you can manage your app, view analytics, logs and more."}
+            />
             <pre>
                 {JSON.stringify(session, null, 2)}
             </pre>

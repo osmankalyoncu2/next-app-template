@@ -4,7 +4,8 @@ import {
     HomeIcon,
     QuestionMarkCircleIcon,
     KeyIcon,
-    CogIcon
+    CogIcon,
+    AdjustmentsHorizontalIcon
 } from '@heroicons/react/16/solid'
 
 export const AppCustomisation = {
@@ -52,6 +53,14 @@ export const AppCustomisation = {
             href: '/settings',
             no_display: true, // This value should be true to hide the navigation item.
             icon: CogIcon,
+        }
+    ],
+    admin: [
+        {
+            name: 'Admin',
+            keywords: ['admin', 'administration', 'users', 'roles', 'permissions'],
+            href: '/admin',
+            icon: AdjustmentsHorizontalIcon,
         }
     ],
     marketing_pages: {

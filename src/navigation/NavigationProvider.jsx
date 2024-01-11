@@ -13,9 +13,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { classNames } from '@/lib/utils/classNames';
 import { AppCustomisation } from '@/lib/app/customisation';
-import Search from '@/components/SearchBar';
+import Search from '@/components/ui/SearchBar';
 import deviceType from '@/lib/utils/deviceType';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 export default function NavigationProvider({
     children
@@ -23,8 +24,11 @@ export default function NavigationProvider({
     const [open, setOpen] = useState(false);
     const [openSearchBar, setOpenSearchBar] = useState(false);
     const [DeviceType, setDeviceType] = useState('unknown');
+    const [navigation, setNavigation] = useState(AppCustomisation.navigation);
     const pathname = usePathname();
-    const navigation = AppCustomisation.navigation;
+    const admin_navigation = AppCustomisation.admin;
+
+    const {data: session, status} = useSession();
 
     useEffect(() => {
         setOpen(false);
@@ -33,6 +37,13 @@ export default function NavigationProvider({
     useEffect(() => {
         setDeviceType(deviceType());
     }, []);
+
+    // if the user is an admin then combine the admin navigation with the navigation
+    useEffect(() => {
+        if (session && session.user && session.user.role === 'admin') {
+            setNavigation([...AppCustomisation.navigation, ...admin_navigation]);
+        }
+    }, [session]);
 
     // if the current path starts with the path of the navigation item, then display the navigation provider
     if (!navigation.some((item) => pathname.startsWith(item.href))) return children;
