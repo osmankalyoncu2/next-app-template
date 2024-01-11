@@ -14,12 +14,14 @@ import {
     restrictedPathnames,
     adminPathnames,
     marketingPages,
+    matcher
 } from "./paths"
 
 export {
     restrictedPathnames,
     adminPathnames,
     marketingPages,
+    matcher
 }
 
 async function fetchUserData(email) {
