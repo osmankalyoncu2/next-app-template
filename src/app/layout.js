@@ -13,11 +13,12 @@ import NavigationProvider from '@/navigation/NavigationProvider'
 
 // Tools
 // Support
-//import Intercom from '@/lib/support/intercom'
+import Intercom from '@/lib/support/intercom'
 
 // Analytics
-//import Hotjar from '@/lib/analytics/hotjar'
-//import GoogleAnalytics from '@/lib/analytics/google-analytics'
+import Hotjar from '@/lib/analytics/hotjar'
+import GoogleAnalytics from '@/lib/analytics/google-analytics'
+import VercelAnalytics from '@/lib/analytics/vercel'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -49,6 +50,12 @@ export default function RootLayout({ children }) {
             <NavigationProvider>
               {children}
             </NavigationProvider>
+            {/* Tools */}
+            <Intercom />
+            {/* Analytics */}
+            <Hotjar />
+            <GoogleAnalytics />
+            <VercelAnalytics />
           </body>
         </ThemeProvider>
       </NextAuthProvider>

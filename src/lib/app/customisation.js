@@ -91,6 +91,11 @@ export const AppCustomisation = {
             // Meta Pixel
             enabled: false, // Override to disable Meta Pixel
             pixelId: "", // Required if `enabled` is set to true.
-        }
+        },
+        vercel: {
+            // Vercel Analytics
+            analytics: false, // Override to disable Vercel Analytics
+            speed_insights: false, // Override to disable Vercel Speed Insights
+        },
     }
 }
