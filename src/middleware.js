@@ -6,7 +6,6 @@ import {
     adminPathnames,
     restrictedPathnames,
     marketingPages,
-    //matcher,
     pages
 } from "@/auth/auth.config";
 import { NextResponse } from "next/server"

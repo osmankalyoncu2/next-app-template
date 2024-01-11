@@ -14,5 +14,3 @@ export const restrictedPathnames = [
 export const adminPathnames = [
     '/admin'
 ]
-
-export const matcher = restrictedPathnames.concat(adminPathnames)
