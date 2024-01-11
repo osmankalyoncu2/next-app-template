@@ -6,7 +6,7 @@ import {
     adminPathnames,
     restrictedPathnames,
     marketingPages,
-    matcher,
+    //matcher,
     pages
 } from "@/auth/auth.config";
 import { NextResponse } from "next/server"
@@ -40,7 +40,3 @@ export default auth((req) => {
         return NextResponse.next()
     }
 })
-
-export const config = {
-    matcher: matcher
-}
