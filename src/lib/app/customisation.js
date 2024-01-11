@@ -61,7 +61,8 @@ export const AppCustomisation = {
             keywords: ['admin', 'administration', 'users', 'roles', 'permissions'],
             href: '/admin',
             icon: AdjustmentsHorizontalIcon,
-        }
+        },
+        // TODO: Add more admin pages here such as `/admin/users` and `/admin/analytics`.
     ],
     marketing_pages: {
         "/pricing": "/pricing",

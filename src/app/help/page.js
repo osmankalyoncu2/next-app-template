@@ -3,6 +3,7 @@ import Title from "@/components/ui/Title";
 import Chat from "./Chat";
 
 import Markdown from 'react-markdown'
+import { AppCustomisation } from "@/lib/app/customisation";
 
 export const metadata = {
     title: 'Help Centre',
@@ -18,10 +19,10 @@ const faqs = [
 export default function HelpPage({
 
 }) {
-    //const intercom_app_id = process.env.INTERCOM_APP_ID;
-
+    // TODO: This needs to be implemented in a separate client component
+    // The Intercom component also needs to be updated for this to work with show/hide
     // intercom is enabled if the app id is set
-    //const intercom_enabled = intercom_app_id && intercom_app_id.length > 0;
+    //const intercom_enabled = AppCustomisation.tools.intercom.enabled && (AppCustomisation.intercom_app_id !== "");
 
     // if intercom is enabled, then the user can click the button to open the chat
     // otherwise they'll be presented with options to contact support
