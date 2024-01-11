@@ -1,11 +1,9 @@
-import type { NextAuthConfig } from "next-auth"
-
 import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 import Email from "next-auth/providers/email"
 
 // Send Email
-import SendEmail from "@/emails/SendEmail";
+//import SendEmail from "@/emails/SendEmail";
 
 // Database Connection
 import { next_auth_database } from "@/lib/database/connect";
@@ -116,5 +114,4 @@ export default {
         }
     },
     pages: pages,
-} satisfies NextAuthConfig
-
+}
