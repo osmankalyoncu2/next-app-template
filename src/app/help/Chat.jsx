@@ -23,7 +23,7 @@ const exampleQuestions = [
 export default function Chat({
 
 }) {
-	const session = useSession();
+	const { data: session, status } = useSession();
 	const [userInitials, setUserInitials] = useState(null);
 	const [userImage, setUserImage] = useState(null);
 
@@ -52,6 +52,7 @@ export default function Chat({
 			const initials = name.split(' ').map((n) => n[0]).join('');
 			setUserInitials(initials);
 			setUserImage(image);
+			console.log(session.user);
 		}
 	}, [session]);
 

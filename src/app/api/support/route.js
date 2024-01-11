@@ -4,16 +4,14 @@ import { OpenAIStream, StreamingTextResponse } from 'ai';
 
 import { NextResponse } from 'next/server'
 
-
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '../auth/[...nextauth]/route'
+import { auth } from "@/auth/auth";
 
 export const runtime = 'edge';
 
 export async function POST(req) {
     const { messages } = await req.json();
 
-    const session = await getServerSession(authOptions);
+    const session = await auth();
 
     if (!session || !session.user) {
         return NextResponse.json({ message: 'No session or user found' }, { status: 401 })

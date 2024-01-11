@@ -1,7 +1,7 @@
 import Title from "@/components/ui/Title";
 import { auth } from "@/auth/auth";
 
-export default async function AppAnalytics({
+export default async function AppConfiguration({
 
 }) {
     const session = await auth();
@@ -9,8 +9,8 @@ export default async function AppAnalytics({
     return (
         <>
             <Title
-                title={"App Analytics"}
-                subtitle={"View the stats of your product."}
+                title={"App Configuration"}
+                subtitle={"Configure your app, change settings, add integrations and more."}
             />
         </>
     )

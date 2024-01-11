@@ -1,29 +1,29 @@
 "use client";
 
+import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import {
     AppCustomisation
 } from '@/lib/app/customisation';
-import { auth } from '@/auth/auth';
 
-const Intercom = async () => {
+const Intercom = () => {
     const api_base = AppCustomisation.tools.intercom.api_url || "https://api-iam.intercom.io";
     const app_id = AppCustomisation.tools.intercom.app_id || "";
     const intercom_enabled = AppCustomisation.tools.intercom.enabled && (app_id !== "");
 
-    const session = await auth();
+    const { data: session, status } = useSession();
 
     useEffect(() => {
         if (!intercom_enabled) return; // If Intercom is disabled, don’t load it.
 
         // If you want non-users to be able to chat via Intercom, comment out the following line:
-        if (!session) return; // Don’t load Intercom if the user is not logged in
+        if (status === "unauthenticated") return; // Don’t load Intercom if the user is not logged in
 
         // We don’t want to load Intercom if the user details are still loading.
         //if (status === "loading") return;
 
         // We don’t want to load Intercom if the user details are not available.
-        if (session && session.user) {
+        if (status === "authenticated") {
             window.intercomSettings = {
                 api_base: api_base,
                 app_id: app_id,
@@ -73,6 +73,7 @@ const Intercom = async () => {
     }, [
         // This dependency array is kinda long
         session,
+        status,
         intercom_enabled,
         api_base,
         app_id
