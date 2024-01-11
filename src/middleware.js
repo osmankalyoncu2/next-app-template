@@ -1,8 +1,8 @@
 // This file is created to prevent a user accessing certain pages without proper authorization.
 
-export { auth as middleware } from "@/auth/auth"
+//export { auth as middleware } from "@/auth/auth"
 
-/*
+import { auth } from "@/auth/auth"
 import {
     checkPathnamesValid,
     adminPathnames,
@@ -11,9 +11,8 @@ import {
     pages
 } from "@/auth/auth.config";
 import { NextResponse } from "next/server"
-import { auth } from "@/auth/auth"
 
-export default auth((req) => {
+const middleware = auth((req) => {
     checkPathnamesValid()
     if (
         adminPathnames.includes(req.nextUrl.pathname) &&
@@ -42,7 +41,8 @@ export default auth((req) => {
         return NextResponse.next()
     }
 })
-*/
+
+export default middleware;
 
 /*
  * Match all request paths except for the ones starting with:
