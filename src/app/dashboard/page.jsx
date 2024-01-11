@@ -19,7 +19,7 @@ export default async function Dashboard({
                 subtitle={"Welcome to your dashboard!"}
             />
             <div
-                className="my-10 px-6 py-4 border border-primary-800 rounded-3xl bg-primary-900"
+                className="my-10 px-6 py-4 border border-primary-800 rounded-xl bg-primary-900"
             >
                 <h3
                     className="text-primary-100 text-2xl"
