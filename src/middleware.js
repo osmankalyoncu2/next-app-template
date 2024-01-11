@@ -1,7 +1,6 @@
 // This file is created to prevent a user accessing certain pages without proper authorization.
 
-import NextAuth from "next-auth";
-import authConfig, {
+import {
     checkPathnamesValid,
     adminPathnames,
     restrictedPathnames,
@@ -9,8 +8,7 @@ import authConfig, {
     pages
 } from "@/auth/auth.config";
 import { NextResponse } from "next/server"
-
-const { auth } = NextAuth(authConfig);
+import { auth } from "@/auth/auth"
 
 export default auth((req) => {
     checkPathnamesValid()
