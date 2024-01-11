@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 // AI Support
 import { useChat } from 'ai/react';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const exampleQuestions = [
 	{
@@ -107,7 +108,13 @@ export default function Chat({
 					>
 						{m.role !== 'user' && (
 							<div className="h-full flex items-end">
-								<img src={"/icon"} alt="AI" className="rounded-full size-8 invert" />
+								<Image
+									src={"/icon"}
+									alt="AI"
+									width={32}
+									height={32}
+									className="rounded-full size-8 invert"
+								/>
 							</div>
 						)}
 						<div
@@ -132,7 +139,13 @@ export default function Chat({
 						{m.role === 'user' && (
 							<div className="h-full flex items-end">
 								{userImage ? (
-									<img src={userImage} alt="User" className="rounded-full size-8" />
+									<Image
+										src={userImage}
+										alt="User"
+										width={32}
+										height={32}
+										className="rounded-full size-8"
+									/>
 								) : (
 									<div
 										className="size-8 rounded-full bg-primary-900 text-primary-100 flex items-center justify-center text-xs"

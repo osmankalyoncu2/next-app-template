@@ -43,7 +43,7 @@ export default function NavigationProvider({
         if (session && session.user && session.user.role === 'admin') {
             setNavigation([...AppCustomisation.navigation, ...admin_navigation]);
         }
-    }, [session]);
+    }, [session, admin_navigation]);
 
     // if the current path starts with the path of the navigation item, then display the navigation provider
     if (!navigation.some((item) => pathname.startsWith(item.href))) return children;
