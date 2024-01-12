@@ -12,13 +12,8 @@ import ThemeProvider from '@/lib/theme/ThemeProvider'
 import NavigationProvider from '@/navigation/NavigationProvider'
 
 // Tools
-// Support
-import Intercom from '@/lib/support/intercom'
-
-// Analytics
-import Hotjar from '@/lib/analytics/hotjar'
-import GoogleAnalytics from '@/lib/analytics/google-analytics'
-import VercelAnalytics from '@/lib/analytics/vercel'
+import Analytics from '@/lib/analytics/Analytics'
+import SupportTools from '@/lib/support/SupportTools'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,6 +33,19 @@ export const metadata = {
       me: ['verification_name', 'verification_token'],
     },
   },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({ children }) {
@@ -51,11 +59,8 @@ export default function RootLayout({ children }) {
               {children}
             </NavigationProvider>
             {/* Tools */}
-            <Intercom />
-            {/* Analytics */}
-            <Hotjar />
-            <GoogleAnalytics />
-            <VercelAnalytics />
+            <Analytics />
+            <SupportTools />
           </body>
         </ThemeProvider>
       </NextAuthProvider>
