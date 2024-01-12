@@ -8,6 +8,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useChat } from 'ai/react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Button from '@/components/ui/Button';
+import TextInput from '@/components/ui/Input';
 
 const exampleQuestions = [
 	{
@@ -85,17 +87,17 @@ export default function Chat({
 							</p>
 						</div>
 						<div
-							className='flex flex-col space-y-4 mt-6'
+							className='flex flex-col space-y-3 mt-6'
 						>
 							{exampleQuestions.map((q) => {
 								return (
-									<button
+									<Button
 										key={q.question}
-										className='w-fit mx-auto bg-primary-800 text-primary-100 px-4 py-2 rounded-lg hover:bg-primary-900 transition duration-200 ease-in-out hover:ring-2 hover:ring-primary-800 text-xs'
+										className='w-fit mx-auto text-xs'
 										onClick={() => handleInputChange({ target: { value: q.question } })}
 									>
 										{q.question}
-									</button>
+									</Button>
 								)
 							})}
 						</div>
@@ -164,21 +166,21 @@ export default function Chat({
 				className="flex group"
 				onSubmit={handleSubmit}
 			>
-				<input
+				<TextInput
 					id="chat-input"
 					type="text"
 					placeholder="Type your question here..."
 					value={input}
 					onChange={handleInputChange}
-					className="placeholder-primary-200 flex-1 p-4 border-0 border-t-2 border-primary-700 rounded-b-lg bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-primary-700 focus-visible:border-primary-700 text-sm"
+					className="rounded-none placeholder-primary-200 flex-1 p-4 border-0 border-t-2 border-primary-700 rounded-b-lg bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:ring-primary-700 focus-visible:border-primary-700 text-sm"
 				/>
-				<button
+				<Button
 					id="chat-submit"
 					type='submit'
-					className="bg-primary-700 text-primary-100 px-4 py-2 rounded-br-lg hover:bg-primary-800 transition duration-200 ease-in-out border-l-2 border-t-2 border-primary-700 text-sm"
+					className="rounded-none hover:ring-0 bg-primary-700 text-primary-100 px-4 py-2 rounded-br-lg hover:bg-primary-800 border-l-2 border-t-2 border-primary-700 text-sm"
 				>
 					Ask
-				</button>
+				</Button>
 			</form>
 		</div>
 	)
