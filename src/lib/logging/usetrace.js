@@ -13,6 +13,7 @@ import { NextResponse } from "next/server";
 
 // Betterstack
 import { logtail } from "@/lib/logging/betterstack";
+import NextError from '../utils/NextError';
 
 // If false, we won't store the API request or response in the database.
 // We will still store the action, status and the impersonator if applicable.
@@ -74,7 +75,13 @@ const withTrace = (
             )
         }
 
-        const body = await response.json();
+        let body = null;
+
+        try {
+            body = await response.json();
+        } catch (error) {
+            // not JSON, but that's fine.
+        }
         const status = response.status;
 
         // log to database
@@ -87,6 +94,9 @@ const withTrace = (
             response: logRequestDetails ? body : null,
         })
 
+        // if body is null, return the response object.
+        if (!body) return response;
+
         return NextResponse.json(
             {
                 ...body,
@@ -97,6 +107,9 @@ const withTrace = (
             }
         )
     } catch (error) {
+        if (error instanceof NextError) error = error.toString();
+        if (error instanceof Error) error = error.message;
+
         // If an error occurs, log it to the database.
         await logRequest({
             trace_id: trace_id,
@@ -104,6 +117,8 @@ const withTrace = (
             status: 500,
             request: logRequestDetails ? req : null,
             response: logRequestDetails ? error : null,
+            error: error,
+            sensitivity: "critical", // The logging request has failed - we need to know about it.
         })
 
         // Return the error to the client.

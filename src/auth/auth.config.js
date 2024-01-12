@@ -5,7 +5,7 @@ import Google from "next-auth/providers/google"
 import SendEmail from "@/emails/SendEmail";
 
 // Database Connection
-import { next_auth_database } from "@/lib/database/connect";
+import { app_database, next_auth_database } from "@/lib/database/connect";
 
 import {
     restrictedPathnames,
@@ -34,6 +34,37 @@ async function fetchUserData(email) {
     }
 
     return data;
+}
+
+async function checkForUserDeletion(user) {
+    if (!user) return;
+    const id = user.id
+
+    const { data, error } = await app_database
+        .from('scheduled')
+        .select('action, variables')
+        .eq('action', 'delete_user')
+        .overlaps('variables', [
+            id
+        ])
+
+    if (error) {
+        console.error(error)
+        return;
+    }
+
+    if (data) {
+        // remove the row
+        await app_database
+            .from('scheduled')
+            .delete()
+            .eq('action', 'delete_user')
+            .overlaps('variables', [
+                id
+            ])
+    }
+
+    return;
 }
 
 export function checkPathnamesValid() {
@@ -98,6 +129,8 @@ const authConfig = {
 
             if (!email) return session;
 
+            session.user.id = token?.sub || null;
+
             const data = await fetchUserData(email);
 
             session.user.role = data?.role || false;
@@ -112,6 +145,11 @@ const authConfig = {
                 const data = await fetchUserData(email);
 
                 token.role = data?.role || false;
+
+                token.uid = user.id;
+
+                // If this user was scheduled for deletion, we need to cancel it
+                checkForUserDeletion(user);
             }
 
             if (isNewUser) {

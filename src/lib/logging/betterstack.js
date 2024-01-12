@@ -1,3 +1,7 @@
+// Betterstack Logging
+
+const BETTERSTACK_TOKEN = process.env.BETTERSTACK_TOKEN;
+
 // Betterstack logging (Logtail) - Backend - Can only be used in the backend
 
 /** Backend Usage:
@@ -20,9 +24,13 @@
 
 const { Node: Logtail } = require("@logtail/js");
 
-export const logtail = new Logtail(
-    process.env.BETTERSTACK_TOKEN
-);
+export const logtail = () => {
+    if (!BETTERSTACK_TOKEN) return null;
+
+    new Logtail(
+        BETTERSTACK_TOKEN
+    );
+}
 
 
 
@@ -48,8 +56,12 @@ export const logtail = new Logtail(
  * 
  */
 
-import { Browser } from "@logtail/browser";
+import { Logtail as Browser } from "@logtail/browser";
 
-export const frontlog = new Browser(
-    process.env.BETTERSTACK_TOKEN
-);
+export const frontlog = () => {
+    if (!BETTERSTACK_TOKEN) return null;
+
+    new Browser(
+        BETTERSTACK_TOKEN
+    );
+}

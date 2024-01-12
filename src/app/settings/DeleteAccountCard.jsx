@@ -2,6 +2,7 @@
 
 import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
+import { signOut } from "next-auth/react";
 
 export default function DeleteAccountCard({
 
@@ -19,12 +20,14 @@ export default function DeleteAccountCard({
                 variant="danger"
                 smaller
                 onClick={async () => {
-                    console.warn("Not implemented yet.");
-                    await new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            resolve();
-                        }, 2000);
+                    const response = await fetch("/api/users", {
+                        method: "DELETE",
+                        credentials: "include",
                     });
+
+                    if (response.ok) {
+                        await signOut();
+                    }
                 }}
             >
                 Request Account Deletion
