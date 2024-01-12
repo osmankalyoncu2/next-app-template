@@ -48,7 +48,7 @@ export function checkPathnamesValid() {
     }
 }
 
-export default {
+const authConfig = {
     providers: [
         Google({
             clientId: process.env.GOOGLE_ID,
@@ -135,3 +135,5 @@ export default {
     },
     pages: authPages,
 }
+
+export default authConfig;

@@ -12,21 +12,21 @@ export const adminPathnames = [
 
 export const marketingPages = {
     "/": "/home",
-}
+};
+
 export const authPages = {
     signUp: "/signup",
     signIn: "/login",
     verifyRequest: "/verify",
     newUser: "/welcome",
-}
+};
 
-// Sitemap pages should consist of all marketing pages and authPages
-// except for verifyRequest and newUser
 export const sitemapPages = {
     ...marketingPages,
     ...Object.keys(authPages).reduce((acc, key) => {
+        const path = authPages[key];
         if (key !== 'verifyRequest' && key !== 'newUser') {
-            acc[key] = authPages[key];
+            acc[path] = path;
         }
         return acc;
     }, {})

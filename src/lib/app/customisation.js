@@ -13,7 +13,6 @@ import {
 } from '@/auth/paths'
 
 export const AppCustomisation = {
-    base_url: "https://makenext.app", // IMPORTANT: Change this to your own domain name.
     branding: {
         // You can change Metadata inside of `/src/app/layout.js`
         logos: {
