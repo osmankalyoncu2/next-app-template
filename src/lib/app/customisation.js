@@ -95,8 +95,8 @@ export const AppCustomisation = {
         },
         vercel: {
             // Vercel Analytics
-            analytics: false, // Override to disable Vercel Analytics
-            speed_insights: false, // Override to disable Vercel Speed Insights
+            analytics: true, // Override to disable Vercel Analytics
+            speed_insights: true, // Override to disable Vercel Speed Insights
         },
     }
 }
