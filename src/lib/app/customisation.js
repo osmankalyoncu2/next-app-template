@@ -8,7 +8,12 @@ import {
     AdjustmentsHorizontalIcon
 } from '@heroicons/react/16/solid'
 
+import {
+    marketingPages,
+} from '@/auth/paths'
+
 export const AppCustomisation = {
+    base_url: "https://makenext.app", // IMPORTANT: Change this to your own domain name.
     branding: {
         // You can change Metadata inside of `/src/app/layout.js`
         logos: {
@@ -64,9 +69,7 @@ export const AppCustomisation = {
         },
         // TODO: Add more admin pages here such as `/admin/users` and `/admin/analytics`.
     ],
-    marketing_pages: {
-        "/pricing": "/pricing",
-    },
+    marketing_pages: marketingPages,
     settings: {
         page: {
             name: 'Settings',

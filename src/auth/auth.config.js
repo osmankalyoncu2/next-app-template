@@ -11,12 +11,14 @@ import {
     restrictedPathnames,
     adminPathnames,
     marketingPages,
+    authPages
 } from "./paths"
 
 export {
     restrictedPathnames,
     adminPathnames,
-    marketingPages
+    marketingPages,
+    authPages
 }
 
 async function fetchUserData(email) {
@@ -44,12 +46,6 @@ export function checkPathnamesValid() {
     if (duplicates.length > 0) {
         throw new Error(`Duplicate pathnames found: ${duplicates.join(', ')}`)
     }
-}
-
-export const pages = {
-    signIn: "/login",
-    verifyRequest: "/verify",
-    newUser: "/welcome",
 }
 
 export default {
@@ -137,5 +133,5 @@ export default {
             return !!auth?.user;
         }
     },
-    pages: pages,
+    pages: authPages,
 }

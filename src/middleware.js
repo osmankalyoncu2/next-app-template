@@ -8,7 +8,7 @@ import {
     adminPathnames,
     restrictedPathnames,
     marketingPages,
-    pages
+    authPages
 } from "@/auth/auth.config";
 import { NextResponse } from "next/server"
 
@@ -27,7 +27,7 @@ const middleware = auth((req) => {
         req?.auth?.user?.role !== 'admin'
     ) {
         const url = req.nextUrl.clone()
-        url.pathname = pages.signIn // Redirect to sign in page
+        url.pathname = authPages.signIn // Redirect to sign in page
         return NextResponse.redirect(url)
     } else if (
         marketingPages[req.nextUrl.pathname] &&
