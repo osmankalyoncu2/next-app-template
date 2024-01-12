@@ -36,11 +36,14 @@ This template has support for these payment types:
 - [x] Meta Pixel Tracking
 - [ ]  Stripe Payments:
 	- [ ] One-time
- 	- [ ] Subscriptions
-  	- [ ] Usage-based billing
-  	- [ ] Donations
+  - [ ] Subscriptions
+  - [ ] Usage-based billing
+  - [ ] Donations
 - [ ] Supabase Database (slowly getting there)
 - [x] Resend Email Sending
+- [ ] Logging
+  - [x] Betterstack Logging
+  - [x] useTrace (Custom Logging)
 - [ ] OpenAI
 
 

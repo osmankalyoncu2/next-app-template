@@ -11,11 +11,19 @@ import { randomUUID } from 'crypto';
 // Next Response
 import { NextResponse } from "next/server";
 
+// Betterstack
+import { logtail } from "@/lib/logging/betterstack";
+
 // If false, we won't store the API request or response in the database.
 // We will still store the action, status and the impersonator if applicable.
 const logRequestDetails = process.env.LOG_REQUEST_DETAILS
     ? process.env.LOG_REQUEST_DETAILS === "true"
     : false;
+
+// This requires Betterstack to be enabled.
+const storeInDatabase = process.env.STORE_TRACE_IN_DATABASE
+    ? process.env.STORE_TRACE_IN_DATABASE === "true"
+    : true;
 
 // The goal of `api-trace` is to log API requests made to the app. This is useful for debugging and for security purposes.
 
@@ -36,13 +44,13 @@ const withTrace = (
     handler,
     action,
     sensitivity
-) => async (req) => {
+) => async (req, res) => {
     // Generate a trace_id for the request.
     const trace_id = generateTraceId();
 
     try {
         // We don’t parse the trace_id in because we will append it to the response by manipulating the response object.
-        const response = await handler(req);
+        const response = await handler(req, res);
 
         // The response object should be a NextResponse object. If it isn't, we will throw an error.
         if (!(response instanceof NextResponse)) {
@@ -128,9 +136,34 @@ async function logRequest({
     response = null,
     error = null,
 }) {
-    const { db_error } = await app_database
-        .from('logs')
-        .insert({
+    if (storeInDatabase) {
+        const { db_error } = await app_database
+            .from('logs')
+            .insert({
+                trace_id: trace_id,
+                impersonator: impersonator,
+                action: action,
+                sensitivity: sensitivity,
+                status: status,
+                request: request,
+                response: response,
+                error: error,
+            })
+
+        if (db_error) {
+            await app_database
+                .from('logs')
+                .insert({
+                    trace_id: trace_id,
+                    action: "attempt-to-log-request-failed",
+                    sensitivity: "critical", // If the logging request has failed, we need to know about it.
+                    status: 500,
+                    error: "An error occured when attempting to log a request: \n\n" + error,
+                })
+        }
+    } else {
+        // If we aren't storing the request in the database, we will log it to Betterstack.
+        logtail.error({
             trace_id: trace_id,
             impersonator: impersonator,
             action: action,
@@ -141,16 +174,7 @@ async function logRequest({
             error: error,
         })
 
-    if (db_error) {
-        await app_database
-            .from('logs')
-            .insert({
-                trace_id: trace_id,
-                action: "attempt-to-log-request-failed",
-                sensitivity: "critical", // If the logging request has failed, we need to know about it.
-                status: 500,
-                error: "An error occured when attempting to log a request: \n\n" + error,
-            })
+        logtail.flush();
     }
 
     return trace_id;

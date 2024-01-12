@@ -6,7 +6,8 @@ import {
     app_database,
     next_auth_database,
 } from "@/lib/database/connect";
-import withTrace from "@/lib/logs/api-trace";
+
+import withTrace from "@/lib/logging/usetrace";
 
 async function requestUserDeletion(
     req

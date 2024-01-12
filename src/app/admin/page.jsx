@@ -21,6 +21,11 @@ const links = [
         title: "Configuration",
         subtitle: "Configure your app, change settings, add integrations and more.",
         href: "/admin/configure"
+    },
+    {
+        title: "App Logs",
+        subtitle: "View the logs you’ve accumulated over time for your app.",
+        href: "/admin/logs"
     }
 ];
 
