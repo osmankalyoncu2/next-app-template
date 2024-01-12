@@ -1,15 +1,6 @@
 import { sitemapPages } from "@/auth/paths"
 
-// For generating multiple sitemaps:
-/*export async function generateSitemaps() {
-    return [
-        {
-            id: 0
-        }
-    ]
-}*/
-
-export default async function sitemap() { // { id } <- If you want to generate multiple sitemaps
+export default function sitemap() {
     const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_AUTH_URL || 'http://localhost:3000';
 
     let sitemapEntries = [];
