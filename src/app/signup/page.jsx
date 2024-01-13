@@ -13,7 +13,7 @@ import Image from "next/image";
 // Authentication
 import { submitForm } from "@/auth/submitForm";
 import { useSession, getProviders, getCsrfToken } from "next-auth/react"
-import Spinner from "@/components/ui/Loader";
+import Spinner from "@/components/aui/Loader";
 
 export default function SignUp() {
     const { data: session, status } = useSession();

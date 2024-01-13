@@ -2,7 +2,7 @@ export const metadata = {
     title: "Settings",
 }
 
-import Heading from "@/components/ui/Heading";
+import Heading from "@/components/aui/Heading";
 import ThemeSwitcher from "@/lib/theme/ThemeSwitcher";
 
 import ChangeEmailCard from "./ChangeEmailCard";

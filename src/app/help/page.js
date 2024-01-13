@@ -1,5 +1,5 @@
-import CTACard from "@/components/ui/CTACard";
-import Title from "@/components/ui/Title";
+import CTACard from "@/components/aui/CTACard";
+import Title from "@/components/aui/Title";
 import Chat from "./Chat";
 
 import Markdown from 'react-markdown'

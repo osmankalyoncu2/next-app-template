@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useChat } from 'ai/react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
-import Button from '@/components/ui/Button';
-import TextInput from '@/components/ui/Input';
+import Button from '@/components/aui/Button';
+import TextInput from '@/components/aui/Input';
 
 const exampleQuestions = [
 	{

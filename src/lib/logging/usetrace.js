@@ -8,8 +8,9 @@ import {
 // Crypto
 import { randomUUID } from 'crypto';
 
-// Next Response
+// Next Server Stuff
 import { NextResponse } from "next/server";
+import { headers as NextHeaders } from 'next/headers';
 
 // Betterstack
 import { logtail } from "@/lib/logging/betterstack";
@@ -48,6 +49,8 @@ const withTrace = (
 ) => async (req, res) => {
     // Generate a trace_id for the request.
     const trace_id = generateTraceId();
+
+    const apiKey = await extractApiKey(req);
 
     try {
         // We don’t parse the trace_id in because we will append it to the response by manipulating the response object.
@@ -92,6 +95,8 @@ const withTrace = (
             status: status,
             request: logRequestDetails ? req : null,
             response: logRequestDetails ? body : null,
+            error: null,
+            api_key: apiKey,
         })
 
         // if body is null, return the response object.
@@ -119,6 +124,7 @@ const withTrace = (
             response: logRequestDetails ? error : null,
             error: error,
             sensitivity: "critical", // The logging request has failed - we need to know about it.
+            api_key: apiKey,
         })
 
         // Return the error to the client.
@@ -193,4 +199,33 @@ async function logRequest({
     }
 
     return trace_id;
+}
+
+async function extractApiKey(req) {
+    // api key can be stored in the Authorization header or in the json body as `api_key`
+    const headers = NextHeaders();
+
+    const authorization = headers.get('authorization') || null;
+
+    if (authorization) {
+        const parts = authorization.split(' ');
+
+        if (parts.length === 2) {
+            const scheme = parts[0];
+            const token = parts[1];
+
+            if (/^Bearer$/i.test(scheme)) {
+                return token;
+            }
+        }
+    }
+
+    // If we haven't returned yet, we will check the body
+    const body = req.json();
+
+    if (body.api_key) {
+        return body.api_key;
+    }
+
+    return null;
 }

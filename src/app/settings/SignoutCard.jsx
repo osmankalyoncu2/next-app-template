@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/ui/Button";
-import Card from "@/components/ui/Card";
+import Button from "@/components/aui/Button";
+import Card from "@/components/aui/Card";
 
 import { signOut } from "next-auth/react"
 

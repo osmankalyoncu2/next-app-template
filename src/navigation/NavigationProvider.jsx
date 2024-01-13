@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { classNames } from '@/lib/utils/classNames';
 import { AppCustomisation } from '@/lib/app/customisation';
-import Search from '@/components/ui/SearchBar';
+import Search from '@/components/aui/SearchBar';
 import deviceType from '@/lib/utils/deviceType';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';

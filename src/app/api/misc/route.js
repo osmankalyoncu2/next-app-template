@@ -22,7 +22,7 @@ async function runMiscJobs() {
     const { data: scheduled_tasks, error: error_getting_scheduled_tasks } = await app_database
         .from('scheduled')
         .select('action, variables')
-        .where('run_after', '<', new Date().toISOString());
+        .lt('run_after', new Date().toISOString());
 
     if (error_getting_scheduled_tasks) {
         return NextResponse.json(

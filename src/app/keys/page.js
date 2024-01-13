@@ -1,4 +1,5 @@
-import Title from "@/components/ui/Title";
+import Title from "@/components/aui/Title";
+import GenerateKey from "./GenerateKey";
 
 export const metadata = {
     title: 'API Keys',
@@ -9,6 +10,7 @@ export const metadata = {
 // to know who generated the key for various reasons:
 // - Usage Based Billing
 // - Who should see what this key is up to
+// - Permissions
 
 export default function APIKeysPage({
 
@@ -19,6 +21,7 @@ export default function APIKeysPage({
                 title={'API Keys'}
                 subtitle={'Generate, manage, and revoke API keys from your account.'}
             />
+            <GenerateKey />
         </>
     )
 }

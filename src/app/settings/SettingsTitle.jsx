@@ -1,6 +1,6 @@
 "use client";
 
-import Title from "@/components/ui/Title";
+import Title from "@/components/aui/Title";
 import {
     AppCustomisation
 } from "@/lib/app/customisation";

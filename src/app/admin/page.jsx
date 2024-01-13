@@ -2,7 +2,7 @@ export const metadata = {
     title: "Admin Dashboard",
 }
 
-import Title from "@/components/ui/Title";
+import Title from "@/components/aui/Title";
 import { auth } from "@/auth/auth";
 import Link from "next/link";
 

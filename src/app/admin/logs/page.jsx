@@ -1,4 +1,4 @@
-import Title from "@/components/ui/Title";
+import Title from "@/components/aui/Title";
 import ViewLogs from "./ViewLogs";
 
 export default async function AppLogs({

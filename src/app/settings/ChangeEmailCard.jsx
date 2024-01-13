@@ -1,10 +1,10 @@
 "use client";
 
-import TextInput from "@/components/ui/Input";
+import TextInput from "@/components/aui/Input";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import Card from "@/components/ui/Card";
-import Button from "@/components/ui/Button";
+import Card from "@/components/aui/Card";
+import Button from "@/components/aui/Button";
 
 function isEmailOkay({ currentEmail, newEmail }) {
     // regex to check if email is valid
