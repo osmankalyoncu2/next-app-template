@@ -36,6 +36,6 @@ It works with the globals.css file to provide the theme for the application.
         --input: 240 3.7% 15.9%;
         --ring: 240 4.9% 83.9%;
 
-        --radius: 1rem;
+        --radius: 0.5rem;
     }
 }

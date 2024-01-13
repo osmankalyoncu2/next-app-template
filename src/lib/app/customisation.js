@@ -29,7 +29,8 @@ export const AppCustomisation = {
         themes: [
             "dark",
             "light",
-            "tokyo"
+            "tokyo",
+            "orange",
         ]
     },
     navigation: [
