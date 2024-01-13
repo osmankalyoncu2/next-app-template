@@ -48,8 +48,7 @@ export default function ThemeSwitcher({
                                 switchTheme(theme);
                                 setCurrentTheme(theme);
                             }}
-                            //disabled={currentTheme === theme}
-                            disabled
+                            disabled={currentTheme === theme}
                         >
                             {theme.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")} Theme
                         </Button>
@@ -64,8 +63,7 @@ export default function ThemeSwitcher({
                         switchTheme(null);
                         setCurrentTheme(null);
                     }}
-                    //disabled={currentTheme === null}
-                    disabled
+                    disabled={currentTheme === null}
                 >
                     Reset Theme
                 </Button>

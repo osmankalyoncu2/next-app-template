@@ -27,8 +27,8 @@ export const AppCustomisation = {
             }
         },
         themes: [
-            "default",
-            "midnight",
+            "dark",
+            "light",
             "tokyo"
         ]
     },

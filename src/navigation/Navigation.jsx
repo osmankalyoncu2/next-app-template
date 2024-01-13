@@ -25,7 +25,7 @@ import deviceType from '@/lib/utils/deviceType';
 import { useSession } from 'next-auth/react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-export default function MiniNav({
+export default function Navigation({
     children,
     defaultCollapsed = false,
     defaultLayout = [15, 85],
@@ -94,7 +94,7 @@ export default function MiniNav({
                         <div
                             className="flex flex-col h-[calc(100%-60px)]"
                         >
-                            {desktopNavigation({ isCollapsed: isCollapsed, items: navigation, pathname: pathname })}
+                            {Sidebar({ isCollapsed: isCollapsed, items: navigation, pathname: pathname })}
                             <div
                                 className="px-2 mt-auto w-full"
                             >
@@ -236,7 +236,7 @@ function AccountManager({
     )
 }
 
-function desktopNavigation({
+function Sidebar({
     isCollapsed = false,
     pathname,
     items = []
@@ -246,7 +246,7 @@ function desktopNavigation({
             data-collapsed={isCollapsed}
             className="relative group flex flex-col py-2 data-[collapsed=true]:py-2"
         >
-            <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+            <nav className="grid gap-1.5 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
                 {items.map((item, index) => {
                     if (item.no_display) return null;
                     if (item.href === pathname) { item.variant = 'default' } else { item.variant = 'ghost' };

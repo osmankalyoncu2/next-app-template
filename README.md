@@ -41,10 +41,16 @@ This template has support for these payment types:
   - [ ] Donations
 - [ ] Supabase Database (slowly getting there)
 - [x] Resend Email Sending
-- [ ] Logging
+- [x] Logging
   - [x] Betterstack Logging
   - [x] useTrace (Custom Logging)
-- [ ] OpenAI
+- [x] OpenAI
+
+
+## Notes
+
+- [ ] The app is not as efficient as it could be. I need to work on that.
+- [ ] I need to add better responsiveness to the Navigation Sidebar
 
 
 ## Setup
