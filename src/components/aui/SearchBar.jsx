@@ -74,18 +74,18 @@ export default function Search({
                         leaveFrom="opacity-100 scale-100"
                         leaveTo="opacity-0 scale-95"
                     >
-                        <Dialog.Panel className="bg-primary-950 bg-opacity-50 mx-auto max-w-2xl transform divide-y divide-primary-50/5 overflow-hidden rounded-xl shadow-2xl ring-1 ring-primary-50/5 backdrop-blur backdrop-filter transition-all">
+                        <Dialog.Panel className="bg-primary bg-opacity-5 mx-auto max-w-2xl transform divide-y divide-primary/5 overflow-hidden rounded-xl shadow-2xl ring-1 ring-primary/5 backdrop-blur backdrop-filter transition-all">
                             <Combobox onChange={(item) => {
                                 router.push(item.href);
                                 setOpen(false);
                             }}>
                                 <div className="relative">
                                     <MagnifyingGlassIcon
-                                        className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-primary-200"
+                                        className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-primary"
                                         aria-hidden="true"
                                     />
                                     <Combobox.Input
-                                        className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-primary-50 focus:ring-0 sm:text-sm placeholder-primary-200"
+                                        className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-primary focus:ring-0 sm:text-sm placeholder-primary"
                                         placeholder="Search..."
                                         autoComplete="off"
                                         onChange={(event) => setQuery(event.target.value)}
@@ -106,7 +106,7 @@ export default function Search({
                                                         className={({ active }) =>
                                                             classNames(
                                                                 "flex cursor-pointer select-none items-center rounded-md px-3 py-2 transition duration-200 ease-in-out",
-                                                                active && "bg-primary-800/15 text-primary-50"
+                                                                active && "bg-primary/5 text-primary"
                                                             )
                                                         }
                                                     >
@@ -115,16 +115,16 @@ export default function Search({
                                                                 {item.icon ?
                                                                     createElement(item.icon, {
                                                                         className: classNames(
-                                                                            "size-6 flex-none text-primary-200 transition duration-200 ease-in-out",
-                                                                            active && "text-primary-50"
+                                                                            "size-6 flex-none text-primary transition duration-200 ease-in-out",
+                                                                            active && "text-primary"
                                                                         ),
                                                                         'aria-hidden': true
                                                                     })
                                                                     :
                                                                     <ArrowTopRightOnSquareIcon
                                                                         className={classNames(
-                                                                            "size-6 flex-none text-primary-200 transition duration-200 ease-in-out",
-                                                                            active && "text-primary-50"
+                                                                            "size-6 flex-none text-primary transition duration-200 ease-in-out",
+                                                                            active && "text-primary"
                                                                         )}
                                                                         aria-hidden="true"
                                                                     />
@@ -133,7 +133,7 @@ export default function Search({
                                                                     {item.name}
                                                                 </span>
                                                                 {active && (
-                                                                    <span className="ml-3 flex-none text-primary-200">
+                                                                    <span className="ml-3 flex-none text-primary">
                                                                         Jump to...
                                                                     </span>
                                                                 )}
@@ -149,10 +149,10 @@ export default function Search({
                                 {query !== "" && filteredItems.length === 0 && (
                                     <div className="px-6 py-14 text-center sm:px-14">
                                         <QuestionMarkCircleIcon
-                                            className="mx-auto h-6 w-6 text-primary-50 text-opacity-40"
+                                            className="mx-auto h-6 w-6 text-primary text-opacity-40"
                                             aria-hidden="true"
                                         />
-                                        <p className="mt-4 text-sm text-primary-50">
+                                        <p className="mt-4 text-sm text-primary">
                                             No results for &quot;{query}&quot;
                                         </p>
                                     </div>

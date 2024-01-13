@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import { resolveTheme } from "@/lib/theme/themeManager";
-import { useEffect } from "react";
+import * as React from "react"
+import { ThemeProvider as NextThemesProvider } from "next-themes"
 
-export default function ThemeProvider({
-    children,
-}) {
-    useEffect(() => {
-        resolveTheme();
-    }, []);
-
-    return children;
+export function ThemeProvider({ children, ...props }) {
+	return (
+		<NextThemesProvider
+			{...props}
+		>
+			{children}
+		</NextThemesProvider>
+	)
 }

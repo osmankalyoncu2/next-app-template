@@ -6,7 +6,7 @@ import {
     KeyIcon,
     CogIcon,
     AdjustmentsHorizontalIcon
-} from '@heroicons/react/16/solid'
+} from '@heroicons/react/24/outline'
 
 import {
     marketingPages,
@@ -73,6 +73,7 @@ export const AppCustomisation = {
         page: {
             name: 'Settings',
             href: '/settings',
+            icon: CogIcon,
             subtext: 'Manage your account settings.'
         }
     },

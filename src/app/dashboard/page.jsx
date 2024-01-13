@@ -24,7 +24,7 @@ export default async function Dashboard({
                 <h3
                     className="text-primary-100 text-2xl"
                 >   
-                    Hey <span className="underline underline-offset-2 text-primary-50">{session.user.name}</span>! 👋
+                    Hey <span className="underline underline-offset-2 text-primary">{session.user.name}</span>! 👋
                 </h3>
                 <p
                     className="mt-2 text-primary-200 text-sm font-semibold"

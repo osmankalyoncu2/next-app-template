@@ -6,7 +6,10 @@ import '@/styles/globals.css'
 import NextAuthProvider from '@/security/NextAuthProvider'
 
 // Theming
-import ThemeProvider from '@/lib/theme/ThemeProvider'
+import { ThemeProvider } from '@/lib/theme/ThemeProvider'
+
+// TestKit
+import TestKit from '@/lib/app/testkit-client'
 
 // Navigation
 import NavigationProvider from '@/navigation/NavigationProvider'
@@ -50,19 +53,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <NextAuthProvider>
-        <ThemeProvider>
-          {/* Other Stuff */}
-          <body className={inter.className + " " + "bg-primary-950"}>
+        {/* Other Stuff */}
+        <body className={inter.className + " " + "bg-background"}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <NavigationProvider>
               {children}
             </NavigationProvider>
             {/* Tools */}
             <Analytics />
             <SupportTools />
-          </body>
-        </ThemeProvider>
+            <TestKit />
+          </ThemeProvider>
+        </body>
       </NextAuthProvider>
     </html>
   )

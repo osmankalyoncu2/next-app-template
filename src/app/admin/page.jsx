@@ -50,7 +50,7 @@ export default async function AdminPage({
                         className="bg-primary-900 border border-primary-800 shadow overflow-hidden rounded-lg px-6 py-4 hover:bg-primary-800 transition duration-200 ease-in-out min-h-48 flex justify-end items-start flex-col"
                     >
                         <h5
-                            className="text-md font-medium text-primary-50"
+                            className="text-md font-medium text-primary"
                         >
                             {link.title}
                         </h5>

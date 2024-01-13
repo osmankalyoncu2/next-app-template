@@ -9,7 +9,7 @@ export default function Title({
             className="flex flex-col"
         >
             <h1
-                className="text-3xl text-primary-50 font-semibold"
+                className="text-3xl text-primary font-semibold"
             >
                 {title}
             </h1>

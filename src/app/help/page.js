@@ -1,20 +1,11 @@
 import CTACard from "@/components/aui/CTACard";
 import Title from "@/components/aui/Title";
 import Chat from "./Chat";
-
-import Markdown from 'react-markdown'
-import { AppCustomisation } from "@/lib/app/customisation";
+import FAQs from "./FAQs";
 
 export const metadata = {
     title: 'Help Centre',
 }
-
-const faqs = [
-    {
-        question: 'How do I get started?',
-        answer: '[__Download the template__](https://github.com/arsenstorm/next-app-template) and follow the instructions in the README.',
-    }
-]
 
 export default function HelpPage({
 
@@ -40,27 +31,8 @@ export default function HelpPage({
                 <div className="col-span-1">
                     <Chat />
                 </div>
-                <div className="col-span-1 border-2 border-primary-700 ring-2 ring-primary-900 ring-offset-2 ring-offset-primary-800 rounded-xl py-4 px-6">
-                    <h3 className="text-xl font-bold mb-4">
-                        Frequently Asked Questions
-                    </h3>
-                    <div className="space-y-4">
-                        {faqs.map((faq, index) => (
-                            <div
-                                className=""
-                                key={index}
-                            >
-                                <h4 className="font-bold">
-                                    {faq.question}
-                                </h4>
-                                <Markdown
-                                    className="text-primary-200 text-sm mt-0.5"
-                                >
-                                    {faq.answer}
-                                </Markdown>
-                            </div>
-                        ))}
-                    </div>
+                <div className="col-span-1">
+                    <FAQs />
                 </div>
                 <div
                     className="col-span-1 md:col-span-2"

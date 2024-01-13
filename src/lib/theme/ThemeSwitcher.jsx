@@ -1,7 +1,16 @@
 "use client";
 
-import Button from "@/components/aui/Button";
-import Card from "@/components/aui/Card";
+// TODO: Theme Switcher needs to be reimplemented
+
+import { Button } from "@/components/ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import {
     switchTheme,
     getTheme,
@@ -21,17 +30,17 @@ export default function ThemeSwitcher({
     }, []);
 
     return (
-        <Card
-
-        >
-            <h1 className="text-2xl text-primary-50">
-                Change Theme
-            </h1>
-            <p className="mt-2 text-sm text-primary-200">
-                Change the look and feel of the app.
-            </p>
-            <div className="mt-4">
-                <div className="flex flex-col space-y-2 w-full max-w-xs">
+        <Card>
+            <CardHeader>
+                <CardTitle>
+                    Change Theme
+                </CardTitle>
+                <CardDescription>
+                    Change the look and feel of the app.
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div className="flex flex-col space-y-1.5 w-full max-w-xs">
                     {themes.map((theme) => (
                         <Button
                             key={theme}
@@ -39,18 +48,28 @@ export default function ThemeSwitcher({
                                 switchTheme(theme);
                                 setCurrentTheme(theme);
                             }}
-                            disabled={currentTheme === theme}
+                            //disabled={currentTheme === theme}
+                            disabled
                         >
-                            {currentTheme === theme ? (
-                                <span>Using</span>
-                            ) : (
-                                <span>Switch to</span>
-                            )}{' '}                            
                             {theme.split("-").map(word => word[0].toUpperCase() + word.slice(1)).join(" ")} Theme
                         </Button>
                     ))}
                 </div>
-            </div>
+            </CardContent>
+            <CardFooter>
+                <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => {
+                        switchTheme(null);
+                        setCurrentTheme(null);
+                    }}
+                    //disabled={currentTheme === null}
+                    disabled
+                >
+                    Reset Theme
+                </Button>
+            </CardFooter>
         </Card>
     )
 }

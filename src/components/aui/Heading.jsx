@@ -12,7 +12,7 @@ export default function Heading({
         >
             <h2
                 className={classNames(
-                    "text-2xl text-primary-50 font-semibold",
+                    "text-2xl text-primary font-semibold",
                     className,
                 )}
             >

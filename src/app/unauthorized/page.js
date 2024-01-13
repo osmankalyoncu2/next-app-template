@@ -35,7 +35,7 @@ export default function Unauthorized() {
                     className="text-left mb-8 w-full"
                 >
                     <h1
-                        className="text-primary-50 text-xl font-semibold mb-2"
+                        className="text-primary text-xl font-semibold mb-2"
                     >
                         You are not authorized to view this page.
                     </h1>
@@ -46,7 +46,7 @@ export default function Unauthorized() {
                     </p>
                     <Link
                         href="/"
-                        className="text-primary-100 font-semibold hover:text-primary-50 transition duration-200 ease-in-out flex flex-row justify-start items-center text-sm"
+                        className="text-primary-100 font-semibold hover:text-primary transition duration-200 ease-in-out flex flex-row justify-start items-center text-sm"
                     >
                         Head back home
                     </Link>

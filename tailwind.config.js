@@ -1,57 +1,75 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/navigation/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  prefix: "",
   theme: {
-    darkMode: 'class',
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
       },
+    },
+    extend: {
       colors: {
+        border: "hsl(var(--border) / <alpha-value>)",
+        input: "hsl(var(--input) / <alpha-value>)",
+        ring: "hsl(var(--ring) / <alpha-value>)",
+        background: "hsl(var(--background) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
         primary: {
-          50: 'rgba(var(--primary-color-50) / <alpha-value>)',
-          100: 'rgba(var(--primary-color-100) / <alpha-value>)',
-          200: 'rgba(var(--primary-color-200) / <alpha-value>)',
-          300: 'rgba(var(--primary-color-300) / <alpha-value>)',
-          400: 'rgba(var(--primary-color-400) / <alpha-value>)',
-          500: 'rgba(var(--primary-color-500) / <alpha-value>)',
-          600: 'rgba(var(--primary-color-600) / <alpha-value>)',
-          700: 'rgba(var(--primary-color-700) / <alpha-value>)',
-          800: 'rgba(var(--primary-color-800) / <alpha-value>)',
-          900: 'rgba(var(--primary-color-900) / <alpha-value>)',
-          950: 'rgba(var(--primary-color-950) / <alpha-value>)'
+          DEFAULT: "hsl(var(--primary) / <alpha-value>)",
+          foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
         },
         secondary: {
-          50: 'rgba(var(--secondary-color-50) / <alpha-value>)',
-          100: 'rgba(var(--secondary-color-100) / <alpha-value>)',
-          200: 'rgba(var(--secondary-color-200) / <alpha-value>)',
-          300: 'rgba(var(--secondary-color-300) / <alpha-value>)',
-          400: 'rgba(var(--secondary-color-400) / <alpha-value>)',
-          500: 'rgba(var(--secondary-color-500) / <alpha-value>)',
-          600: 'rgba(var(--secondary-color-600) / <alpha-value>)',
-          700: 'rgba(var(--secondary-color-700) / <alpha-value>)',
-          800: 'rgba(var(--secondary-color-800) / <alpha-value>)',
-          900: 'rgba(var(--secondary-color-900) / <alpha-value>)',
-          950: 'rgba(var(--secondary-color-950) / <alpha-value>)'
+          DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
+          foreground: "hsl(var(--secondary-foreground) / <alpha-value>)",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
+          foreground: "hsl(var(--destructive-foreground) / <alpha-value>)",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted) / <alpha-value>)",
+          foreground: "hsl(var(--muted-foreground) / <alpha-value>)",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent) / <alpha-value>)",
+          foreground: "hsl(var(--accent-foreground) / <alpha-value>)",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover) / <alpha-value>)",
+          foreground: "hsl(var(--popover-foreground) / <alpha-value>)",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card) / <alpha-value>)",
+          foreground: "hsl(var(--card-foreground) / <alpha-value>)",
         },
       },
-      padding: {
-        /*
-          The paddings below are used in the components found in /src/components
-          They are used to create consistent spacing between elements when you change the themes
-          TODO: Implement accessiblity themes
-        */
-        'size-x': 'var(--padding-size-x)',
-        'size-y': 'var(--padding-size-y)',
-        'smaller-size-x': 'var(--smaller-padding-size-x)',
-        'smaller-size-y': 'var(--smaller-padding-size-y)',
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
@@ -59,5 +77,6 @@ module.exports = {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
+    require("tailwindcss-animate"),
   ],
 }
