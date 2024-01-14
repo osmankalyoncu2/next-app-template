@@ -45,6 +45,7 @@ This template has support for these payment types:
   - [x] Betterstack Logging
   - [x] useTrace (Custom Logging)
 - [x] OpenAI
+- [ ] Sample Email Templates
 
 
 ## Notes

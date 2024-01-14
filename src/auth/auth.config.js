@@ -136,7 +136,7 @@ const authConfig = {
             session.user.role = data?.role || false;
             return session;
         },
-        async jwt({ token, user, newUser }) {
+        async jwt({ token, user, newUser, trigger, session = null }) {
             const isSignIn = (user) ? true : false;
             const isNewUser = (newUser) ? true : false;
 
@@ -156,6 +156,10 @@ const authConfig = {
                 token.newUser = true;
             } else {
                 token.newUser = false;
+            }
+
+            if (trigger === "update" && session?.name) {
+                token.name = session.name;
             }
 
             return token;

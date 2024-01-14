@@ -9,6 +9,7 @@ import ChangeEmailCard from "./ChangeEmailCard";
 import DeleteAccountCard from "./DeleteAccountCard";
 import SettingsTitle from "./SettingsTitle";
 import SignoutCard from "./SignoutCard";
+import ChangeNameCard from "./ChangeNameCard";
 
 export default function SettingsPage({
 
@@ -23,6 +24,7 @@ export default function SettingsPage({
                 className="flex flex-col gap-4"
             >
                 <SignoutCard />
+                <ChangeNameCard />
                 <ChangeEmailCard />
                 <DeleteAccountCard />
             </div>

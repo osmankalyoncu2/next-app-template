@@ -18,6 +18,9 @@ import NavigationProvider from '@/navigation/NavigationProvider'
 import Analytics from '@/lib/analytics/Analytics'
 import SupportTools from '@/lib/support/SupportTools'
 
+// UI
+import { Toaster } from "@/components/ui/sonner"
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -65,6 +68,7 @@ export default function RootLayout({ children }) {
             <Analytics />
             <SupportTools />
             <TestKit />
+            <Toaster />
           </ThemeProvider>
         </body>
       </NextAuthProvider>

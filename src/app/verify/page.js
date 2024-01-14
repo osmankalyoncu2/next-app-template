@@ -5,6 +5,7 @@ import Link from "next/link";
 import {
 	ChevronLeftIcon
 } from "@heroicons/react/20/solid";
+import { Button } from "@/components/ui/button";
 
 export default function VerifyEmail() {
 	return (
@@ -14,15 +15,21 @@ export default function VerifyEmail() {
 			<div
 				className="absolute top-6 left-6 bg-primary-950"
 			>
-				<Link
-					href="/"
-					className="text-primary-200 font-semibold hover:text-primary-100 transition duration-200 ease-in-out flex flex-row justify-start items-center text-sm px-3 py-2 hover:bg-primary-900 rounded-full"
+				<Button
+					asChild
+					variant="ghost"
+					className="rounded-full"
 				>
-					<ChevronLeftIcon
-						className="inline-block size-4 mr-1"
-					/>
-					Home
-				</Link>
+					<Link
+						href="/"
+						className="text-primary font-semibold transition duration-200 ease-in-out flex flex-row justify-start items-center text-sm px-3 py-2 rounded-full"
+					>
+						<ChevronLeftIcon
+							className="inline-block size-4 mr-1"
+						/>
+						Home
+					</Link>
+				</Button>
 			</div>
 
 			<div
@@ -43,7 +50,7 @@ export default function VerifyEmail() {
 					</p>
 					<Link
 						href="/"
-						className="text-primary-100 font-semibold hover:text-primary transition duration-200 ease-in-out flex flex-row justify-start items-center text-sm"
+						className="font-semibold transition duration-200 ease-in-out flex flex-row justify-start items-center text-sm"
 					>
 						Head back home
 					</Link>

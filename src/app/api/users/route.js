@@ -106,12 +106,100 @@ async function requestUserDeletion(
     );
 }
 
-export async function PATCH() {
+const updatable_details = {};
+
+async function updateUserDetails(req) {
     // Method for a user to update their details
+
+    const user = await auth();
+
+    if (!user) {
+        return NextResponse.json(
+            {
+                "status": "error",
+                "message": "You must be logged in to update your account.",
+            },
+            {
+                status: 401,
+            }
+        )
+    }
+
+    // Step 0. Check that the user has provided the correct details
+    const { data } = await req.json();
+
+    const errors = [];
+
+    for (const [key, value] of Object.entries(data)) {
+        if (!updatable_details[key]) {
+            errors.push({
+                "key": key,
+                "message": "This key is not updatable.",
+            });
+        } else {
+            if (typeof value !== updatable_details[key].type) {
+                errors.push({
+                    "key": key,
+                    "message": "This key is not of the correct type.",
+                });
+            } else {
+                if (value.length < updatable_details[key].minLength) {
+                    errors.push({
+                        "key": key,
+                        "message": "This key is too short.",
+                    });
+                } else if (value.length > updatable_details[key].maxLength) {
+                    errors.push({
+                        "key": key,
+                        "message": "This key is too long.",
+                    });
+                }
+            }
+        }
+
+        if (errors.length > 0) {
+            return NextResponse.json(
+                {
+                    "status": "error",
+                    "message": "There were errors with your request.",
+                    "errors": errors,
+                },
+                {
+                    status: 400,
+                }
+            );
+        }
+
+        // Step 1. Update the user's details
+        const { error } = await updatable_details[key].function(value, user.user.id);
+
+        if (error) {
+            return NextResponse.json(
+                {
+                    "status": "error",
+                    "message": "There was an error updating your details.",
+                },
+                {
+                    status: 500,
+                }
+            );
+        }
+
+        // Step 2. Return a success message
+        return NextResponse.json(
+            {
+                "status": "success",
+                "message": "Your details have been updated.",
+            },
+            {
+                status: 200,
+            }
+        );
+    }
 
     return NextResponse.json(
         {
-            message: "Details updated.",
+            message: "This should never happen.",
         },
         {
             status: 200,
@@ -120,3 +208,4 @@ export async function PATCH() {
 }
 
 export const DELETE = withTrace(requestUserDeletion, "user-deletion-request", "high"); // A user requesting their account to be deleted is a high sensitivity action
+export const PATCH = withTrace(updateUserDetails, "user-details-update", "low"); // Updating a user's details is a low sensitivity action

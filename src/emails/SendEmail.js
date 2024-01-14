@@ -6,14 +6,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function SendEmail({
     to = "delivered@resend.dev", // This can be an array of emails
-    from = `${process.env.RESEND_NAME} <${process.env.RESEND_EMAIL}>`,
+    from = null,
     subject = "Hello!", // The subject of the email
     ReactTemplate, // Email Template
     data = {}, // Data to populate the template with
 }) {
     // if `from` is null, use the default from address
     if (from === null) {
-        from = ``;
+        from = `${process.env.RESEND_NAME} <${process.env.RESEND_EMAIL}>`;
     }
 
     // if `to` is an array, do nothing, else convert to array
@@ -23,9 +23,8 @@ export default async function SendEmail({
 
     try {
         const response = await resend.emails.send({
-            //from: from,
             to: to,
-            from: "Acme <onboarding@resend.dev>",
+            from: from,
             subject: subject,
             react: ReactTemplate(data),
             headers: {
