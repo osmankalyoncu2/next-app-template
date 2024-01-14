@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { cn } from '@/lib/utils/utils';
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
     Tooltip,
     TooltipContent,
@@ -22,8 +22,9 @@ import { usePathname } from 'next/navigation';
 import { AppCustomisation } from '@/lib/app/customisation';
 import Search from '@/components/aui/SearchBar';
 import deviceType from '@/lib/utils/deviceType';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 
 export default function Navigation({
     children,
@@ -88,7 +89,7 @@ export default function Navigation({
                         }}
                         className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out")}
                     >
-                        <div className={cn("flex h-[52px] items-center justify-center border-b", isCollapsed ? 'h-[52px]' : 'px-2')}>
+                        <div className={cn("flex h-[52px] items-center justify-center border-b", isCollapsed ? 'h-[52px]' : 'px-1')}>
                             <AccountManager isCollapsed={isCollapsed} />
                         </div>
                         <div
@@ -96,7 +97,7 @@ export default function Navigation({
                         >
                             {Sidebar({ isCollapsed: isCollapsed, items: navigation, pathname: pathname })}
                             <div
-                                className="px-2 mt-auto w-full"
+                                className="px-1 mt-auto w-full"
                             >
                                 <Link
                                     href={AppCustomisation.settings.page.href}
@@ -231,6 +232,17 @@ function AccountManager({
                         </div>
                     </SelectItem>
                 ))}
+                <Separator className="my-1" />
+                <Button
+                    className="w-full"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                        signOut();
+                    }}
+                >
+                    Signout
+                </Button>
             </SelectContent>
         </Select>
     )
@@ -246,7 +258,7 @@ function Sidebar({
             data-collapsed={isCollapsed}
             className="relative group flex flex-col py-2 data-[collapsed=true]:py-2"
         >
-            <nav className="grid gap-1.5 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+            <nav className="grid gap-1.5 px-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
                 {items.map((item, index) => {
                     if (item.no_display) return null;
                     if (item.href === pathname) { item.variant = 'default' } else { item.variant = 'ghost' };
