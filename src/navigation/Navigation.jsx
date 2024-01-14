@@ -72,7 +72,7 @@ export default function Navigation({
                         collapsedSize={0}
                         collapsible={true}
                         minSize={10}
-                        maxSize={15}
+                        maxSize={25}
                         // instead of using onCollapse or onExpand which is unreliable, we'll use onResize which returns data that we can use to determine if the panel is collapsed or not
                         onResize={(size) => {
                             if (size === 0) {
@@ -87,7 +87,7 @@ export default function Navigation({
                                 )}`
                             }
                         }}
-                        className={cn(isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out")}
+                        className={cn(isCollapsed && "transition-all duration-300 ease-in-out", "min-w-[50px]")}
                     >
                         <div className={cn("flex h-[52px] items-center justify-center border-b", isCollapsed ? 'h-[52px]' : 'px-1')}>
                             <AccountManager isCollapsed={isCollapsed} />
@@ -256,7 +256,7 @@ function Sidebar({
     return (
         <div
             data-collapsed={isCollapsed}
-            className="relative group flex flex-col py-2 data-[collapsed=true]:py-2"
+            className="relative group flex flex-col py-2 data-[collapsed=true]:py-2 min-w-[50px]"
         >
             <nav className="grid gap-1.5 px-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
                 {items.map((item, index) => {
