@@ -3,9 +3,9 @@ import 'server-only'
 import Stripe from 'stripe'
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2023-10-16',
+    apiVersion: process.env.STRIPE_API_VERSION,
     appInfo: {
-        name: 'Tailrift',
-        url: 'https://tailrift.com',
+        name: process.env.STRIPE_APP_NAME,
+        url: process.env.STRIPE_APP_URL,
     },
 })

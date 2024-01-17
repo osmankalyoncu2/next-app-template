@@ -39,10 +39,10 @@ export async function POST(req) {
 
     const permittedEvents = [
         // Early Fraud Warning System (Radar)
-        'radar.early_fraud_warning.created',
+        /*'radar.early_fraud_warning.created',
 
         // Disputes (Chargebacks) [DISABLED]
-        /*'charge.dispute.created',
+        'charge.dispute.created',
         'charge.dispute.closed',
         'charge.dispute.funds_reinstated',
         'charge.dispute.funds_withdrawn',*/
