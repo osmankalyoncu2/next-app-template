@@ -21,17 +21,6 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -41,6 +30,9 @@ import {
     CardHeader,
     CardTitle
 } from '@/components/ui/card';
+import SavedCards from './SavedCards';
+import { toast } from 'sonner';
+import { ThemeUpdated } from '@/lib/theme/themeManager';
 
 export default function Checkout({
     payment_methods = null,
@@ -52,7 +44,7 @@ export default function Checkout({
 }) {
     const [appearance, setAppearance] = React.useState(null);
 
-    React.useEffect(() => {
+    ThemeUpdated(() => {
         setAppearance({
             theme: 'stripe', // night, flat or stripe
             variables: {
@@ -63,7 +55,7 @@ export default function Checkout({
                 borderRadius: getStyleVariable('--radius'),
             }
         });
-    }, []);
+    })
 
     if (!user) return null;
     if (!appearance) return null;
@@ -99,7 +91,7 @@ export default function Checkout({
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-
+                                <SavedCards payment_methods={payment_methods} price={formatAmountForDisplay(amount, currency)} />
                             </CardContent>
                         </Card>
                     </AccordionContent>
@@ -148,137 +140,24 @@ function CheckoutForm({ user_email, amount, currency, product_uid, user_id }) {
     const elements = useElements()
 
     const PaymentStatus = ({ status }) => {
+        console.log("Called PaymentStatus, " + status)
         switch (status) {
             case 'processing':
             case 'requires_payment_method':
             case 'requires_confirmation':
-                return (
-                    <AlertDialog defaultOpen={payment !== "initial"}>
-                        <AlertDialogContent>
-                            <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                    Processing payment
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    Please wait while we process your payment.
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogCancel asChild>
-                                    <Button
-                                        variant="outline"
-                                        onClick={() => {
-                                            setTimeout(() => {
-                                                setPayment({ status: 'initial' })
-                                            }, 50)
-                                        }}
-                                    >
-                                        Continue
-                                    </Button>
-                                </AlertDialogCancel>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialog>
-                )
-
+                toast.warning('Processing...');
+                return null;
             case 'requires_action':
-                return (
-                    <>
-                        <AlertDialog defaultOpen={payment !== "initial"}>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>
-                                        Additional action required
-                                    </AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        We need additional information to authenticate your payment. You will be redirected to your bank’s website to complete this process.
-                                    </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel asChild>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => {
-                                                setTimeout(() => {
-                                                    setPayment({ status: 'initial' })
-                                                }, 50)
-                                            }}
-                                        >
-                                            Continue
-                                        </Button>
-                                    </AlertDialogCancel>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
-                    </>
-                )
-
+                toast.warning('Needs authentication!');
+                return null;
             case 'succeeded':
-                return (
-                    <>
-                        <AlertDialog defaultOpen={payment !== "initial"}>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>
-                                        Payment successful
-                                    </AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        Your payment was successful. You will receive an email confirmation shortly.
-                                    </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel asChild>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => {
-                                                setTimeout(() => {
-                                                    setPayment({ status: 'initial' })
-                                                }, 50)
-                                            }}
-                                        >
-                                            Continue
-                                        </Button>
-                                    </AlertDialogCancel>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
-                    </>
-                )
-
+                toast.success('Payment successful!');
+                return null;
             case 'error':
-                return (
-                    <>
-                        <AlertDialog defaultOpen={payment !== "initial"}>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                    <AlertDialogTitle>
-                                        An error occurred while processing your payment
-                                    </AlertDialogTitle>
-                                    <AlertDialogDescription>
-                                        {errorMessage}
-                                    </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                    <AlertDialogCancel asChild>
-                                        <Button
-                                            variant="outline"
-                                            onClick={() => {
-                                                setTimeout(() => {
-                                                    setPayment({ status: 'initial' })
-                                                }, 50)
-                                            }}
-                                        >
-                                            Continue
-                                        </Button>
-                                    </AlertDialogCancel>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
-                    </>
-                )
-
+                toast.error(errorMessage);
+                return null;
             default:
-                return null
+                return null;
         }
     }
 
