@@ -7,10 +7,10 @@ export default function NavigationProvider({
 }) {
     const layout = cookies().get("react-resizable-panels:layout")
     const collapsed = cookies().get("react-resizable-panels:collapsed")
-  
-    const defaultLayout = layout ? JSON.parse(layout.value) : false
-    const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : [15, 85]
-    
+
+    const defaultLayout = layout ? JSON.parse(layout.value) : [15, 85];
+    const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : false;
+
     return (
         <>
             <MiniNav defaultCollapsed={defaultCollapsed} defaultLayout={defaultLayout}>
