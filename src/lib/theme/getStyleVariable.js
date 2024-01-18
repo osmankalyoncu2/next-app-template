@@ -1,4 +1,6 @@
 export function getStyleVariable(variableName, convertToHex = false) {
+    if (typeof getComputedStyle === 'undefined') return null;
+    
     const style = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
 
     if (!convertToHex) {

@@ -7,6 +7,9 @@ import SendEmail from "@/emails/SendEmail";
 // Database Connection
 import { app_database, next_auth_database } from "@/lib/database/connect";
 
+// Stripe
+import { stripe } from "@/lib/stripe/stripe";
+
 import {
     restrictedPathnames,
     adminPathnames,
@@ -21,11 +24,13 @@ export {
     authPages
 }
 
-async function fetchUserData(email) {
-    const { data, error } = await next_auth_database
+async function fetchUserData(user) {
+    const user_id = user.id;
+
+    const { data, error } = await app_database
         .from('users')
         .select('role')
-        .eq('email', email)
+        .eq('user_id', user_id)
         .single();
 
     if (error) {
@@ -62,6 +67,60 @@ async function checkForUserDeletion(user) {
             .overlaps('variables', [
                 id
             ])
+    }
+
+    return;
+}
+
+async function configureAppForUser(user) {
+    const { data: user_data, error: user_error } = await app_database
+        .from('users')
+        .select('*')
+        .eq('user_id', user.id)
+
+    if (user_error) {
+        console.error("Error 1: " + user_error)
+        return;
+    }
+
+    if (!user_data || user_data.length === 0) {
+        // user doesn't exist, insert user_id and role = "user"
+        await app_database
+            .from('users')
+            .insert({
+                user_id: user.id,
+                role: 'user'
+            })
+    }
+
+    const { data: user_customer, error } = await app_database
+        .from('users')
+        .select('customer_id')
+        .eq('user_id', user.id)
+        .single()
+
+    if (error) {
+        console.error("Error 2: " + error)
+        return;
+    }
+
+    if (user_customer.customer_id === null) {
+        // create the new customers
+        const customer = await stripe.customers.create({
+            name: user.name,
+            email: user.email,
+            metadata: {
+                user_id: user.id
+            }
+        })
+
+        // update the user
+        await app_database
+            .from('users')
+            .update({
+                customer_id: customer.id
+            })
+            .eq('user_id', user.id)
     }
 
     return;
@@ -131,7 +190,11 @@ const authConfig = {
 
             session.user.id = token?.sub || null;
 
-            const data = await fetchUserData(email);
+            if (!session.user.id) return session;
+
+            await configureAppForUser(session.user);
+
+            const data = await fetchUserData(session?.user);
 
             session.user.role = data?.role || false;
             return session;
@@ -141,15 +204,16 @@ const authConfig = {
             const isNewUser = (newUser) ? true : false;
 
             if (isSignIn) {
-                const email = user.email;
-                const data = await fetchUserData(email);
+                await configureAppForUser(user);
+
+                const data = await fetchUserData(user);
 
                 token.role = data?.role || false;
 
                 token.uid = user.id;
 
                 // If this user was scheduled for deletion, we need to cancel it
-                checkForUserDeletion(user);
+                await checkForUserDeletion(user);
             }
 
             if (isNewUser) {

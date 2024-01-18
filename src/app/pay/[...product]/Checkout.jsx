@@ -6,37 +6,54 @@ import {
     useElements,
     PaymentElement,
     Elements,
+    linkAuthenticationElement
 } from '@stripe/react-stripe-js'
 
 import { formatAmountForDisplay } from '@/lib/stripe/stripe-helpers'
 import getStripe from '@/lib/stripe/get-stripe'
-import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 import { createPaymentIntent } from '@/app/api/payments/route'
-
-import { AnimatePresence, motion } from 'framer-motion'
 
 import { getStyleVariable } from '@/lib/theme/getStyleVariable';
 
 import {
-    CheckCircleIcon,
-    ExclamationTriangleIcon,
-    XMarkIcon,
-} from '@heroicons/react/24/outline'
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle
+} from '@/components/ui/card';
 
 export default function Checkout({
+    payment_methods = null,
+    user = null,
     amount = 0,
     currency = 'usd',
     type = 'payment', // payment | setup | subscription
     product_uid = null,
 }) {
-    const { data: session, status } = useSession();
+    if (!user) return null;
 
-    if (status === 'loading') return null;
-    if (status === 'unauthenticated') redirect('/');
-
-    const user_email = session.user.email;
-    const user_id = session.user.id;
+    const user_email = user.email;
+    const user_id = user.id;
 
     const appearance = {
         theme: 'stripe', // night, flat or stripe
@@ -47,35 +64,78 @@ export default function Checkout({
             colorDanger: getStyleVariable('--destructive', true),
             borderRadius: getStyleVariable('--radius'),
         }
-
     };
-    
+
+    const loader = 'auto';
+
     return (
-        <Elements
-            stripe={getStripe()}
-            options={{
-                currency: currency,
-                mode: type,
-                amount: amount.toString().includes('.') ? amount * 100 : amount,
-                appearance: appearance,
-            }}
-        >
-            <CheckoutForm
-                currency={currency}
-                user_email={user_email}
-                user_id={user_id}
-                amount={amount}
-                product_uid={product_uid}
-            />
-        </Elements>
+        <div className='max-w-md mx-auto'>
+            <Accordion
+                type="single"
+                collapsible
+                defaultValue={
+                    payment_methods && payment_methods.length > 0
+                        ? 'saved-card'
+                        : 'new-card'
+                }
+            >
+                <AccordionItem value="saved-card">
+                    <AccordionTrigger>
+                        Use previously saved card
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        <Card>
+                            <CardHeader>
+                                <CardTitle>
+                                    Select a card
+                                </CardTitle>
+                                <CardDescription>
+                                    Choose a previously saved card to use for this payment.
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+
+                            </CardContent>
+                        </Card>
+                    </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="new-card">
+                    <AccordionTrigger>
+                        Use a new payment method
+                    </AccordionTrigger>
+                    <AccordionContent>
+                        <Elements
+                            stripe={getStripe()}
+                            options={{
+                                currency: currency,
+                                mode: type,
+                                amount: amount.toString().includes('.') ? Number(amount.toString().replace('.', '')) : amount,
+                                appearance: appearance,
+                                loader: loader,
+                                // TODO: Add custom font to Stripe
+                                /*fonts: [
+                                    {
+                                        cssSrc: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
+                                    }
+                                ]*/
+                            }}
+                        >
+                            <CheckoutForm
+                                currency={currency}
+                                user_email={user_email}
+                                user_id={user_id}
+                                amount={amount}
+                                product_uid={product_uid}
+                            />
+                        </Elements>
+                    </AccordionContent>
+                </AccordionItem>
+            </Accordion>
+        </div>
     )
 }
 
-function CheckoutForm({ user_email, amount, name, currency, product_uid, user_id }) {
-    const [input, setInput] = React.useState({
-        cardholderName: name || '',
-    })
-    const [paymentType, setPaymentType] = React.useState('')
+function CheckoutForm({ user_email, amount, currency, product_uid, user_id }) {
     const [payment, setPayment] = React.useState({ status: 'initial' }) //initial
     const [errorMessage, setErrorMessage] = React.useState('')
 
@@ -88,82 +148,133 @@ function CheckoutForm({ user_email, amount, name, currency, product_uid, user_id
             case 'requires_payment_method':
             case 'requires_confirmation':
                 return (
-                    <>
-                        <section
-                            id='payment-status'
-                            className='absolute inset-0 flex items-center justify-center w-full h-full bg-white bg-opacity-50 z-50'
-                        >
-                            <div>
-                                <svg class="animate-spin h-12 w-12 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                            </div>
-                        </section>
-                    </>
+                    <AlertDialog defaultOpen={payment !== "initial"}>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle>
+                                    Processing payment
+                                </AlertDialogTitle>
+                                <AlertDialogDescription>
+                                    Please wait while we process your payment.
+                                </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                                <AlertDialogCancel asChild>
+                                    <Button
+                                        variant="outline"
+                                        onClick={() => {
+                                            setTimeout(() => {
+                                                setPayment({ status: 'initial' })
+                                            }, 50)
+                                        }}
+                                    >
+                                        Continue
+                                    </Button>
+                                </AlertDialogCancel>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
                 )
 
             case 'requires_action':
                 return (
                     <>
-                        <section
-                            id='payment-status'
-                            className='absolute inset-0 flex items-center justify-center w-full h-full bg-white bg-opacity-50 z-50'
-                            onClick={() => setPayment({ status: 'initial' })}
-                        >
-                            <div className='flex flex-col items-center justify-center border border-neutral-200 rounded-3xl p-8 backdrop-blur-sm'>
-                                <ExclamationTriangleIcon className="w-12 h-12 text-yellow-500" />
-                                <h2 className="text-xl font-bold text-center">Additional action required</h2>
-                            </div>
-                        </section>
+                        <AlertDialog defaultOpen={payment !== "initial"}>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        Additional action required
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        We need additional information to authenticate your payment. You will be redirected to your bank's website to complete this process.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel asChild>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => {
+                                                setTimeout(() => {
+                                                    setPayment({ status: 'initial' })
+                                                }, 50)
+                                            }}
+                                        >
+                                            Continue
+                                        </Button>
+                                    </AlertDialogCancel>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </>
                 )
 
             case 'succeeded':
                 return (
                     <>
-                        <section
-                            id='payment-status'
-                            className='absolute inset-0 flex items-center justify-center w-full h-full bg-white bg-opacity-50 z-50'
-                            onClick={() => setPayment({ status: 'initial' })}
-                        >
-                            <div className='flex flex-col items-center justify-center border border-neutral-200 rounded-3xl p-8 backdrop-blur-sm'>
-                                <CheckCircleIcon className="w-12 h-12 text-green-500" />
-                                <h2 className="text-xl font-bold text-center">
-                                    Whoop whoop! Payment succeeded!
-                                </h2>
-                            </div>
-                        </section>
+                        <AlertDialog defaultOpen={payment !== "initial"}>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        Payment successful
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        Your payment was successful. You will receive an email confirmation shortly.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel asChild>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => {
+                                                setTimeout(() => {
+                                                    setPayment({ status: 'initial' })
+                                                }, 50)
+                                            }}
+                                        >
+                                            Continue
+                                        </Button>
+                                    </AlertDialogCancel>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </>
                 )
 
             case 'error':
                 return (
                     <>
-                        <section
-                            id='payment-status'
-                            className='absolute inset-0 flex items-center justify-center w-full h-full bg-white bg-opacity-50 z-50'
-                            onClick={() => setPayment({ status: 'initial' })}
-                        >
-                            <div className='flex flex-col items-center justify-center border border-neutral-200 rounded-3xl p-8 backdrop-blur-sm'>
-                                <XMarkIcon className="w-12 h-12 text-red-500" />
-                                <h2 className="text-xl font-bold text-center">Payment failed :(</h2>
-                                <p className="text-center">{errorMessage}</p>
-                            </div>
-                        </section>
+                        <AlertDialog defaultOpen={payment !== "initial"}>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        An error occurred while processing your payment
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        {errorMessage}
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel asChild>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => {
+                                                setTimeout(() => {
+                                                    setPayment({ status: 'initial' })
+                                                }, 50)
+                                            }}
+                                        >
+                                            Continue
+                                        </Button>
+                                    </AlertDialogCancel>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </>
                 )
 
             default:
                 return null
         }
-    }
-
-    const handleInputChange = (e) => {
-        setInput({
-            ...input,
-            [e.currentTarget.name]: e.currentTarget.value,
-        })
     }
 
     const handleSubmit = async (e) => {
@@ -189,6 +300,13 @@ function CheckoutForm({ user_email, amount, name, currency, product_uid, user_id
                 new FormData(e.target)
             )
 
+            if (!clientSecret) {
+                // an error occured
+                setPayment({ status: 'error' })
+                setErrorMessage('An unknown error occurred')
+                return;
+            }
+
             // Use your card Element with other Stripe.js APIs
             const { error: confirmError } = await stripe.confirmPayment({
                 elements,
@@ -197,8 +315,7 @@ function CheckoutForm({ user_email, amount, name, currency, product_uid, user_id
                     return_url: `${window.location.origin}/pay/${product_uid}/success`,
                     payment_method_data: {
                         billing_details: {
-                            name: input.cardholderName,
-                            email: input.receipt_email
+                            email: user_email,
                         },
                     },
                 },
@@ -219,63 +336,35 @@ function CheckoutForm({ user_email, amount, name, currency, product_uid, user_id
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <div
-                    className='rounded-3xl p-8 border border-neutral-200'
-                >
-                    <input type='hidden' name='product_uid' defaultValue={product_uid} />
-                    <input type='hidden' name='user_email' defaultValue={user_email} />
-                    <input type='hidden' name='user_id' defaultValue={user_id} />
-                    <fieldset className="">
-                        {paymentType === 'card' ? (
-                            <>
-                                <label
-                                    className="block mb-0 text-[0.93rem] ]"
-                                    htmlFor="cardholderName"
-                                >
-                                    Cardholder name
-                                </label>
-                                <input
-                                    placeholder="My cool name"
-                                    className="p-3 border border-[#e6e6e6] rounded-md w-full mb-4 text-sm"
-                                    type="Text"
-                                    name="cardholderName"
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                            </>
-                        ) : null}
-                        <div className="">
-                            <PaymentElement
-                                onChange={(e) => {
-                                    setPaymentType(e.value.type)
-                                }}
-                            />
-                        </div>
-                    </fieldset>
-                </div>
-                <button
-                    className="mt-4 w-full py-3 text-sm font-bold text-white bg-neutral-950 hover:bg-neutral-900 rounded-3xl disabled:cursor-not-allowed disabled:bg-neutral-200 disabled:text-neutral-500 transition duration-200 ease-in-out"
-                    type="submit"
-                    disabled={
-                        !['initial', 'succeeded', 'error'].includes(payment.status) ||
-                        !stripe
-                    }
-                >
-                    Purchase for {formatAmountForDisplay(amount, currency)}
-                </button>
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Payment Details</CardTitle>
+                        <CardDescription>Enter your payment details below</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <input type='hidden' name='product_uid' defaultValue={product_uid} />
+                        <input type='hidden' name='user_email' defaultValue={user_email} />
+                        <input type='hidden' name='user_id' defaultValue={user_id} />
+                        <PaymentElement />
+                    </CardContent>
+                    <CardFooter>
+                        <Button
+                            className="w-full"
+                            variant="default"
+                            type="submit"
+                            disabled={
+                                !['initial', 'succeeded', 'error'].includes(payment.status) ||
+                                !stripe
+                            }
+                        >
+                            Purchase for {formatAmountForDisplay(amount, currency)}
+                        </Button>
+                    </CardFooter>
+                </Card>
             </form>
-            <AnimatePresence>
-                {['succeeded', 'error'].includes(payment.status) && (
-                    <motion.div
-                        className="absolute inset-0 flex items-center justify-center w-full h-full bg-white bg-opacity-50 z-50"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-                        <PaymentStatus status={payment.status} />
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {['succeeded', 'error'].includes(payment.status) && (
+                <PaymentStatus status={payment.status} />
+            )}
         </>
     )
 }

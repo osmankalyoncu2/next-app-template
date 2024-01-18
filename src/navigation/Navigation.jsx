@@ -25,6 +25,8 @@ import deviceType from '@/lib/utils/deviceType';
 import { signOut, useSession } from 'next-auth/react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 export default function Navigation({
     children,
@@ -96,26 +98,48 @@ export default function Navigation({
                             className="flex flex-col h-[calc(100%-60px)]"
                         >
                             {Sidebar({ isCollapsed: isCollapsed, items: navigation, pathname: pathname })}
-                            <div
-                                className="px-1 mt-auto w-full"
-                            >
-                                <Link
-                                    href={AppCustomisation.settings.page.href}
-                                    className={cn(
-                                        buttonVariants({ variant: 'ghost', size: isCollapsed ? "icon" : "sm" }),
-                                        isCollapsed ? "size-9" : "justify-start",
-                                        "w-full"
-                                    )}
+                            {isCollapsed ? (
+                                <Tooltip key="settings-index" delayDuration={0}>
+                                    <TooltipTrigger asChild>
+                                        <div
+                                            className="mt-auto w-full px-2"
+                                        >
+                                            <Link
+                                                href={AppCustomisation.settings.page.href}
+                                                className={cn(
+                                                    buttonVariants({ variant: 'ghost', size: "icon" }),
+                                                    "size-9 w-full"
+                                                )}
+                                            >
+                                                <AppCustomisation.settings.page.icon
+                                                    className="size-5"
+                                                />
+                                                <span className="sr-only">Settings</span>
+                                            </Link>
+                                        </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right" className="flex items-center gap-4">
+                                        Settings
+                                    </TooltipContent>
+                                </Tooltip>
+                            ) : (
+                                <div
+                                    className="px-1 mt-auto w-full"
                                 >
-                                    <AppCustomisation.settings.page.icon
+                                    <Link
+                                        href={AppCustomisation.settings.page.href}
                                         className={cn(
-                                            "size-5",
-                                            !isCollapsed && "mr-2"
+                                            buttonVariants({ variant: 'ghost', size: "sm" }),
+                                            "justify-start w-full",
                                         )}
-                                    />
-                                    {isCollapsed ? <span className="sr-only">Settings</span> : 'Settings'}
-                                </Link>
-                            </div>
+                                    >
+                                        <AppCustomisation.settings.page.icon
+                                            className="size-5 mr-2"
+                                        />
+                                        Settings
+                                    </Link>
+                                </div>
+                            )}
                         </div>
                     </ResizablePanel>
 
@@ -139,8 +163,9 @@ export default function Navigation({
                                             setOpenSearchBar(true);
                                         }}
                                     >
-                                        <span
-                                            className='text-primary-200 rounded-md bg-primary-900 px-2 py-1 text-xs font-bold border border-primary-800'
+                                        <Badge
+                                            className='rounded-md'
+                                            variant="outline"
                                         >
                                             {
                                                 DeviceType === 'windows'
@@ -149,7 +174,7 @@ export default function Navigation({
                                                         ? '⌘+K'
                                                         : 'Search...'
                                             }
-                                        </span>
+                                        </Badge>
                                         <span
                                             className='ml-2'
                                         >
@@ -185,18 +210,13 @@ function AccountManager({
             email: "arsen@makenext.app",
             label: "Arsen",
             icon: (
-                <svg
-                    className="size-4 text-foreground"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                >
-                    <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M10 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM5 5a5 5 0 1110 0 5 5 0 01-10 0zm10 10a5 5 0 100-10 5 5 0 000 10z"
-                    />
-                </svg>
+                <Image
+                    src={AppCustomisation.branding.logos.mini.src}
+                    alt={AppCustomisation.branding.logos.mini.alt}
+                    width={16}
+                    height={16}
+                    className="rounded-full"
+                />
             ),
         },
     ]
