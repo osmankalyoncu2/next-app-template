@@ -5,7 +5,7 @@ import Google from "next-auth/providers/google"
 import SendEmail from "@/emails/SendEmail";
 
 // Database Connection
-import { app_database, next_auth_database } from "@/lib/database/connect";
+import { app_database } from "@/lib/database/connect";
 
 // Stripe
 import { stripe } from "@/lib/stripe/stripe";

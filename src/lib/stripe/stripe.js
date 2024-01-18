@@ -10,5 +10,6 @@ export const stripe = new Stripe(
             name: process.env.STRIPE_APP_NAME,
             url: process.env.STRIPE_APP_URL,
         },
+        httpClient: Stripe.createFetchHttpClient()
     }
 )

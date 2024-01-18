@@ -186,7 +186,7 @@ function CheckoutForm({ user_email, amount, currency, product_uid, user_id }) {
                                         Additional action required
                                     </AlertDialogTitle>
                                     <AlertDialogDescription>
-                                        We need additional information to authenticate your payment. You will be redirected to your bank's website to complete this process.
+                                        We need additional information to authenticate your payment. You will be redirected to your bank’s website to complete this process.
                                     </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
