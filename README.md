@@ -16,6 +16,9 @@
 
 ---
 
+> [!CAUTION]
+> Payments and Subscriptions are **not** yet supported - they will be supported in `v1.0.0`
+
 ## Getting Started
 
 This template uses Supabase, Stripe, Resend, Next Auth, OpenAI, and Next.js. It is a full stack template that can be used to build a SaaS application.
