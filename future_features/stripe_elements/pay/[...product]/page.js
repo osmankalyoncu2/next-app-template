@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { getPaymentMethods, getPaymentOptions } from '@/app/api/payments/route'
+import { getPaymentMethods, getPaymentOptions } from '../../../../future_features/stripe_elements/payments/route'
 import Checkout from './Checkout';
 import { auth } from '@/auth/auth';
 

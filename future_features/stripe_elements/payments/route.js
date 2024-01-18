@@ -59,7 +59,7 @@ export async function getPaymentMethods(user_id) {
         customer: customer_id,
         type: 'card',
     })
-    
+
     return paymentMethods.data
 }
 
@@ -81,8 +81,11 @@ export async function createPaymentIntent(
     data
 ) {
     const coupon = data.get('coupon', '')
-
+    const payment_method = data.get('payment_method', null)
     const pricing_plans = await getPaymentOptions()
+
+    // If true, the payment will be processed immediately if a payment method is provided
+    const PAY_NOW = data.get('pay_now', false)
 
     const CURRENCY = 'gbp' // TODO: Use database to store currency for the specific product
     const PRODUCT = pricing_plans.find(x => x.product_uid === data.get('product_uid'))
@@ -101,7 +104,7 @@ export async function createPaymentIntent(
         case 'payment':
             let price = PRODUCT.price;
 
-            if (coupon) {
+            if (coupon && coupon !== '' && coupon !== null) {
                 const promotionCodes = await stripe.promotionCodes.list({
                     active: true,
                     code: coupon,
@@ -131,6 +134,7 @@ export async function createPaymentIntent(
                         price,
                         CURRENCY
                     ),
+                    payment_method: payment_method,
 
                     customer: customer_id,
                     automatic_payment_methods: { enabled: true },
@@ -149,7 +153,8 @@ export async function createPaymentIntent(
                         price: PRODUCT.stripe_id,
                     },
                 ],
-                promotion_code: coupon,
+                default_payment_method: payment_method,
+                coupon: coupon && coupon !== '' ? coupon : null,
                 payment_behavior: 'default_incomplete',
                 payment_settings: { save_default_payment_method: 'on_subscription' },
                 expand: ['latest_invoice.payment_intent'],

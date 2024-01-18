@@ -11,7 +11,7 @@ import {
 
 import { formatAmountForDisplay } from '@/lib/stripe/stripe-helpers'
 import getStripe from '@/lib/stripe/get-stripe'
-import { createPaymentIntent } from '@/app/api/payments/route'
+import { createPaymentIntent } from '../../../../future_features/stripe_elements/payments/route'
 
 import { getStyleVariable } from '@/lib/theme/getStyleVariable';
 
@@ -60,10 +60,40 @@ export default function Checkout({
     if (!user) return null;
     if (!appearance) return null;
 
-    const user_email = user.email;
-    const user_id = user.id;
+    const user_email = user.user.email;
+    const user_id = user.user.id;
 
     const loader = 'auto';
+
+    async function onPaymentMethodSelected(data) {
+        const { card_fingerprint } = data;
+
+        // fingerprint in format 'fingerprint:1234567890'
+        const fingerprint = card_fingerprint.split(':')[1];
+
+        const payment_method = payment_methods.find(pm => pm.card.fingerprint === fingerprint);
+
+        if (!payment_method) return;
+
+        const { id } = payment_method;
+
+        const paymentData = new FormData();
+        paymentData.append('coupon', null);
+        paymentData.append('payment_method', id);
+        paymentData.append('product_uid', product_uid);
+        paymentData.append('user_email', user_email);
+        paymentData.append('user_id', user_id);
+        paymentData.append('pay_now', true);
+
+        const { client_secret: clientSecret } = await createPaymentIntent(paymentData);
+
+        if (!clientSecret) {
+            toast.error('An unknown error occurred');
+            return;
+        }
+
+        
+    }
 
     return (
         <div className='max-w-md mx-auto'>
@@ -91,7 +121,7 @@ export default function Checkout({
                                 </CardDescription>
                             </CardHeader>
                             <CardContent>
-                                <SavedCards payment_methods={payment_methods} price={formatAmountForDisplay(amount, currency)} />
+                                <SavedCards payment_methods={payment_methods} price={formatAmountForDisplay(amount, currency)} onSelect={async (data) => onPaymentMethodSelected(data)} />
                             </CardContent>
                         </Card>
                     </AccordionContent>

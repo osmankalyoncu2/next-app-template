@@ -23,11 +23,10 @@ export default function SavedCards({
     const fingerprints = Array.from(new Set(payment_methods.map(pm => pm.card.fingerprint)));
 
     const SchemaSavedCards = z.object({
-        payment_method: z.enum(
+        card_fingerprint: z.enum(
             fingerprints.map(fingerprint => `fingerprint:${fingerprint}`), {
             required_error: "You must select a payment method.",
-        }
-        ),
+        }),
     })
 
     const form = useForm({
@@ -39,7 +38,7 @@ export default function SavedCards({
             <form onSubmit={form.handleSubmit(onSelect)} className="w-2/3 space-y-6">
                 <FormField
                     control={form.control}
-                    name="payment_method"
+                    name="card_fingerprint"
                     render={({ field }) => (
                         <FormItem className="space-y-3">
                             <FormLabel>
