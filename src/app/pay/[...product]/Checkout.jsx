@@ -50,21 +50,26 @@ export default function Checkout({
     type = 'payment', // payment | setup | subscription
     product_uid = null,
 }) {
+    const [appearance, setAppearance] = React.useState(null);
+
+    React.useEffect(() => {
+        setAppearance({
+            theme: 'stripe', // night, flat or stripe
+            variables: {
+                colorPrimary: getStyleVariable('--primary', true),
+                colorText: getStyleVariable('--foreground', true),
+                colorBackground: getStyleVariable('--background', true),
+                colorDanger: getStyleVariable('--destructive', true),
+                borderRadius: getStyleVariable('--radius'),
+            }
+        });
+    }, []);
+
     if (!user) return null;
+    if (!appearance) return null;
 
     const user_email = user.email;
     const user_id = user.id;
-
-    const appearance = {
-        theme: 'stripe', // night, flat or stripe
-        variables: {
-            colorPrimary: getStyleVariable('--primary', true),
-            colorText: getStyleVariable('--foreground', true),
-            colorBackground: getStyleVariable('--background', true),
-            colorDanger: getStyleVariable('--destructive', true),
-            borderRadius: getStyleVariable('--radius'),
-        }
-    };
 
     const loader = 'auto';
 
