@@ -19,7 +19,7 @@ export default function SocialLoginProviders({
 
     return (
         <>
-            {Object.values(providers).filter((provider) => provider.name !== "Email").length > 1 && (
+            {Object.values(providers).filter((provider) => provider.name !== "Email").length >= 1 && (
                 <div className="relative my-6 w-full">
                     <div className="absolute inset-0 flex items-center" aria-hidden="true">
                         <div className="w-full border-t border-primary-500" />
@@ -45,7 +45,7 @@ export default function SocialLoginProviders({
                             <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
                             <Button
                                 type="submit"
-                                variant="default"
+                                variant="outline"
                                 disabled={clickedStates[provider.id]}
                                 className="relative px-2 py-2 flex flex-row justify-center items-center w-full"
                             >
@@ -53,14 +53,14 @@ export default function SocialLoginProviders({
                                     <div
                                         className="absolute inset-0 flex items-center justify-center w-full h-full"
                                     >
-                                        <Spinner color="text-primary-foreground" />
+                                        <Spinner color="text-secondary-foreground" />
                                     </div>
                                 )}
                                 <div
                                     className="flex flex-row justify-center items-center w-full h-full"
                                 >
                                     {getProviderLogo(provider.id)}
-                                    <span className="ml-2 text-primary-foreground font-semibold text-sm">
+                                    <span className="ml-2 text-secondary-foreground font-semibold text-sm">
                                         {type} with {provider.name}
                                     </span>
                                 </div>

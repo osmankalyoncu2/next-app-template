@@ -5,7 +5,10 @@ import Google from "next-auth/providers/google"
 import SendEmail from "@/emails/SendEmail";
 
 // Database Connection
-import { app_database } from "@/lib/database/connect";
+import {
+    app_database,
+    next_auth_database
+} from "@/lib/database/connect";
 
 // Stripe
 import { stripe } from "@/lib/stripe/stripe";
@@ -222,8 +225,14 @@ const authConfig = {
                 token.newUser = false;
             }
 
-            if (trigger === "update" && session?.name) {
+            if(trigger === "update" && session?.name) {
                 token.name = session.name;
+                await next_auth_database
+                    .from('users')
+                    .update({
+                        name: session.name
+                    })
+                    .eq('id', token.uid)
             }
 
             return token;
