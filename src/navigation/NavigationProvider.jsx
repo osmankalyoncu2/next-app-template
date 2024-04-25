@@ -2,6 +2,9 @@ import { cookies } from "next/headers"
 
 import MiniNav from "./Navigation";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 NavigationProvider.propTypes = {
     children: PropTypes.node
 };

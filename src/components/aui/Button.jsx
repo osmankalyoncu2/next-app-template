@@ -6,6 +6,9 @@
 
 import { classNames } from "@/lib/utils/classNames";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 Button.propTypes = {
     children: PropTypes.node,
     disabled: PropTypes.bool,

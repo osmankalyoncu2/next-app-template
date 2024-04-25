@@ -2,6 +2,9 @@
 
 import { classNames } from "@/lib/utils/classNames";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 Heading.propTypes = {
     heading: PropTypes.string,
     className: PropTypes.string,

@@ -21,6 +21,9 @@ import SupportTools from '@/lib/support/SupportTools'
 // UI
 import { Toaster } from "@/components/ui/sonner"
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

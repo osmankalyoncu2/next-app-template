@@ -1,5 +1,8 @@
 import NextVideo from 'next-video';
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 Video.propTypes = {
     src: PropTypes.string,
 };

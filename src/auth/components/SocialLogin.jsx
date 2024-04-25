@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useState } from "react";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 SocialLoginProviders.propTypes = {
     type: PropTypes.string,
     csrfToken: PropTypes.string,

@@ -3,6 +3,9 @@
 import { classNames } from "@/lib/utils/classNames";
 import { useId } from "react";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 TextInput.propTypes = {
     id: PropTypes.string,
     label: PropTypes.string,

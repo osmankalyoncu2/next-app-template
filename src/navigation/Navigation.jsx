@@ -28,6 +28,9 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 Navigation.propTypes = {
     children: PropTypes.node,
     defaultCollapsed: PropTypes.bool,

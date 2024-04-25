@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/card"
 import { Button } from "../ui/button";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 CTACard.propTypes = {
     title: PropTypes.string,
     subtitle: PropTypes.string,

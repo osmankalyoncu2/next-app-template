@@ -10,6 +10,9 @@ import {
 } from "@heroicons/react/24/outline";
 import classNames from "@/lib/utils/classNames";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
 Search.propTypes = {
     open: PropTypes.bool,
     setOpen: PropTypes.func,
