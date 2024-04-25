@@ -15,9 +15,7 @@ import { cn } from "@/lib/utils/utils";
 import { signOut } from "next-auth/react"
 import { useState } from "react";
 
-export default function SignoutCard({
-
-}) {
+export default function SignoutCard() {
     const [isWorking, setIsWorking] = useState(false);
 
     return (

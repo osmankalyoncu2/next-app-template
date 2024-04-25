@@ -2,9 +2,7 @@
 
 import Button from "@/components/aui/Button";
 
-export default function GenerateKey({
-
-}) {
+export default function GenerateKey() {
     return (
         <Button
             onClick={async () => {

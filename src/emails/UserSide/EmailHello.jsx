@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+EmailTemplate.propTypes = {
+    firstName: PropTypes.string.isRequired,
+};
+
 export const EmailTemplate = ({
     firstName,
 }) => (

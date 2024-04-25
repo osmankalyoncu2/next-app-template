@@ -15,6 +15,11 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+KeyTable.propTypes = {
+    columns: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
+};
+
 export function KeyTable({
     columns,
     data,

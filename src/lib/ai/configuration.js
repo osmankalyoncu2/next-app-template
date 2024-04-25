@@ -1,12 +1,13 @@
 import OpenAI from 'openai';
 
-let openai = null;
+const getOpenAIInstance = () => {
+    if (process.env.AI_API_KEY) {
+        return new OpenAI({
+            apiKey: process.env.AI_API_KEY,
+            baseURL: process.env.AI_BASE_URL || 'https://api.openai.com/v1',
+        });
+    }
+    return null;
+};
 
-if (process.env.AI_API_KEY) {
-    openai = new OpenAI({
-        apiKey: process.env.AI_API_KEY,
-        baseURL: process.env.AI_BASE_URL || 'https://api.openai.com/v1',
-    });
-}
-
-export default openai;
+export default getOpenAIInstance;

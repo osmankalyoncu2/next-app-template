@@ -1,11 +1,15 @@
 // User Management is only available to Admins
 
-import { NextResponse } from "next/server";
-
-import {
-    app_database,
-    next_auth_database,
-} from "@/lib/database/connect";
+/** 
+ * 
+ * TODO: Complete the implementation of the User Management API
+ * import { NextResponse } from "next/server";
+ * 
+ * import {
+ *     app_database,
+ *     next_auth_database,
+ * } from "@/lib/database/connect";
+*/
 
 export async function GET() {
     // Get specific details for a user from the database

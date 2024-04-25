@@ -17,11 +17,7 @@ import {
 } from '@/components/ui/input';
 import {
 	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
+	CardContent
 } from "@/components/ui/card"
 
 const exampleQuestions = [
@@ -36,10 +32,8 @@ const exampleQuestions = [
 	}
 ];
 
-export default function Chat({
-
-}) {
-	const { data: session, status } = useSession();
+export default function Chat() {
+	const { data: session } = useSession();
 	const [userInitials, setUserInitials] = useState(null);
 	const [userImage, setUserImage] = useState(null);
 
@@ -63,7 +57,7 @@ export default function Chat({
 	}, [messages]);
 
 	useEffect(() => {
-		if (session && session.user) {
+		if (session?.user) {
 			const { name, image } = session.user;
 			const initials = name.split(' ').map((n) => n[0]).join('');
 			setUserInitials(initials);
@@ -139,9 +133,9 @@ export default function Chat({
 									m.role === 'user' ? 'rounded-bl-3xl ml-auto' : 'rounded-br-3xl'
 								)}
 							>
-								{m.role !== 'user' && m.content.split(' ').map((word, index) => (
+								{m.role !== 'user' && m.content.split(' ').map((word) => (
 									<motion.span
-										key={index}
+										key={word}
 										variants={wordVariants}
 										initial="hidden"
 										animate="visible"

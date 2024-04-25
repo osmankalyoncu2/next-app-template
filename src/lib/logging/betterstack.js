@@ -22,7 +22,7 @@ const BETTERSTACK_TOKEN = process.env.BETTERSTACK_TOKEN;
  * 
  */
 
-const { Node: Logtail } = require("@logtail/js");
+/**const { Node: Logtail } = require("@logtail/js");
 
 export const logtail = () => {
     if (!BETTERSTACK_TOKEN) return null;
@@ -30,11 +30,7 @@ export const logtail = () => {
     new Logtail(
         BETTERSTACK_TOKEN
     );
-}
-
-
-
-// TODO: I think the below might not work due to an issue with `process.env.BETTERSTACK_TOKEN` being used on the client side.
+}*/
 
 // Betterstack logging (Logtail) - Frontend - I've called it frontlog to avoid confusion with the backend logger
 
@@ -56,7 +52,8 @@ export const logtail = () => {
  * 
  */
 
-import { Logtail as Browser } from "@logtail/browser";
+/**
+ * import { Logtail as Browser } from "@logtail/browser";
 
 export const frontlog = () => {
     if (!BETTERSTACK_TOKEN) return null;
@@ -64,4 +61,4 @@ export const frontlog = () => {
     new Browser(
         BETTERSTACK_TOKEN
     );
-}
+}*/

@@ -3,6 +3,13 @@
 import { classNames } from "@/lib/utils/classNames";
 import { useId } from "react";
 
+TextInput.propTypes = {
+    id: PropTypes.string,
+    label: PropTypes.string,
+    className: PropTypes.string,
+    smaller: PropTypes.bool,
+};
+
 export default function TextInput({
     id = null,
     label = null,

@@ -5,9 +5,7 @@
 import Script from 'next/script'
 import { AppCustomisation } from '../app/customisation'
 
-export default function GoogleAnalytics({
-
-}) {
+export default function GoogleAnalytics() {
     // Alternatively, instead of setting an environment
     // variable, you can directly set the ID here.
     const ga_id = AppCustomisation.tools.google_analytics.ga_id; // Includes "G-" prefix

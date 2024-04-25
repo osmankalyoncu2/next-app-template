@@ -1,4 +1,0 @@
-/payments - api route
-/pay - app router
-
-the goal: no Stripe Checkout - user stays on the platform

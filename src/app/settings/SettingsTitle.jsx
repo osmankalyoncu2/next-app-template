@@ -5,9 +5,7 @@ import {
     AppCustomisation
 } from "@/lib/app/customisation";
 
-export default function SettingsTitle({
-
-}) {
+export default function SettingsTitle() {
     return (
         <Title
             // Modify these props directly, or in the src/lib/app/customisation.js file.

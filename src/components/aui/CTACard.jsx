@@ -6,11 +6,17 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import { Button } from "../ui/button";
+
+CTACard.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    button: PropTypes.string,
+    href: PropTypes.string,
+};
 
 export default function CTACard({
     title = "Contact support",

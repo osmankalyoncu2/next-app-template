@@ -2,6 +2,11 @@
 
 import { classNames } from "@/lib/utils/classNames";
 
+Heading.propTypes = {
+    heading: PropTypes.string,
+    className: PropTypes.string,
+};
+
 export default function Heading({
     heading = "Section Heading",
     className = "",

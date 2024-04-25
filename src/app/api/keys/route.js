@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 import { auth } from "@/auth/auth";
 import withTrace from "@/lib/logging/usetrace";
-import { generateApiKey, whoIsApiKey } from "@/lib/utils/apiKey";
+import { generateApiKey } from "@/lib/utils/apiKey";
 
 async function revokeApiKey(
     req

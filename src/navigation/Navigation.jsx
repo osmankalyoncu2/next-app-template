@@ -21,12 +21,18 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation';
 import { AppCustomisation } from '@/lib/app/customisation';
 import Search from '@/components/aui/SearchBar';
-import deviceType from '@/lib/utils/deviceType';
+import getDeviceType from '@/lib/utils/deviceType';
 import { signOut, useSession } from 'next-auth/react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+
+Navigation.propTypes = {
+    children: PropTypes.node,
+    defaultCollapsed: PropTypes.bool,
+    defaultLayout: PropTypes.arrayOf(PropTypes.number),
+};
 
 export default function Navigation({
     children,
@@ -38,23 +44,32 @@ export default function Navigation({
     const admin_navigation = AppCustomisation.admin;
     const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
     const [openSearchBar, setOpenSearchBar] = useState(false);
-    const [DeviceType, setDeviceType] = useState('unknown');
+    const [deviceType, setDeviceType] = useState('unknown');
 
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
 
     useEffect(() => {
-        setDeviceType(deviceType());
+        setDeviceType(getDeviceType());
     }, []);
 
     // if the user is an admin then combine the admin navigation with the navigation
     useEffect(() => {
-        if (session && session.user && session.user.role === 'admin') {
+        if (session?.user && session.user.role === 'admin') {
             setNavigation([...AppCustomisation.navigation, ...admin_navigation]);
         }
     }, [session, admin_navigation]);
 
     // if the current path starts with the path of the navigation item, then display the navigation provider
     if (!navigation.some((item) => pathname.startsWith(item.href))) return children;
+
+    let shortcut;
+    if (deviceType === 'windows') {
+        shortcut = 'Ctrl+K';
+    } else if (deviceType === 'mac') {
+        shortcut = '⌘+K';
+    } else {
+        shortcut = 'Search...';
+    }
 
     return (
         <TooltipProvider>
@@ -153,38 +168,33 @@ export default function Navigation({
                                     <label htmlFor="search-field" className="sr-only">
                                         Search
                                     </label>
-                                    <div
+                                    <button
                                         id="search-field"
                                         className="relative h-full w-full border-0 py-0 pr-0 text-primary placeholder:text-primary-200 focus:ring-0 sm:text-sm bg-transparent flex items-center"
-                                        type="search"
-                                        name="search"
+                                        type="button"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             setOpenSearchBar(true);
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                setOpenSearchBar(true);
+                                            }
                                         }}
                                     >
                                         <Badge
                                             className='rounded-md'
                                             variant="outline"
                                         >
-                                            {
-                                                DeviceType === 'windows'
-                                                    ? 'Ctrl+K'
-                                                    : DeviceType === 'mac'
-                                                        ? '⌘+K'
-                                                        : 'Search...'
-                                            }
+                                            {shortcut}
                                         </Badge>
-                                        <span
-                                            className='ml-2'
-                                        >
-                                            {
-                                                DeviceType === 'windows' || DeviceType === 'mac'
-                                                    ? 'Search for anything...'
-                                                    : ''
-                                            }
+                                        <span className='ml-2'>
+                                            {deviceType === 'windows' || deviceType === 'mac'
+                                                ? 'Search for anything...'
+                                                : ''}
                                         </span>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
 
@@ -199,9 +209,20 @@ export default function Navigation({
                     </ResizablePanel>
                 </ResizablePanelGroup>
             </div>
-        </TooltipProvider>
+        </TooltipProvider >
     )
 }
+
+AccountManager.propTypes = {
+    isCollapsed: PropTypes.bool,
+    accounts: PropTypes.arrayOf(
+        PropTypes.shape({
+            email: PropTypes.string,
+            label: PropTypes.string,
+            icon: PropTypes.node,
+        })
+    ),
+};
 
 function AccountManager({
     isCollapsed = false,
@@ -268,6 +289,20 @@ function AccountManager({
     )
 }
 
+Sidebar.propTypes = {
+    isCollapsed: PropTypes.bool,
+    pathname: PropTypes.string,
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            href: PropTypes.string,
+            icon: PropTypes.node,
+            no_display: PropTypes.bool,
+            label: PropTypes.string,
+        })
+    ),
+};
+
 function Sidebar({
     isCollapsed = false,
     pathname,
@@ -279,12 +314,12 @@ function Sidebar({
             className="relative group flex flex-col py-2 data-[collapsed=true]:py-2 min-w-[50px]"
         >
             <nav className="grid gap-1.5 px-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
-                {items.map((item, index) => {
+                {items.map((item) => {
                     if (item.no_display) return null;
                     if (item.href === pathname) { item.variant = 'default' } else { item.variant = 'ghost' };
 
                     return isCollapsed ? (
-                        <Tooltip key={index} delayDuration={0}>
+                        <Tooltip key={item.name} delayDuration={0}>
                             <TooltipTrigger asChild>
                                 <Link
                                     href={item.href}

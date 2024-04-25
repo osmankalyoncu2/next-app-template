@@ -7,9 +7,7 @@ export const metadata = {
     title: 'Help Centre',
 }
 
-export default function HelpPage({
-
-}) {
+export default function HelpPage() {
     // TODO: This needs to be implemented in a separate client component
     // The Intercom component also needs to be updated for this to work with show/hide
     // intercom is enabled if the app id is set

@@ -1,15 +1,18 @@
 "use client";
 
-import { useTheme } from "next-themes";
-
-const possibleThemes = ["system", "light", "dark"];
-
 export default function TestkitClient() {
-    const { theme, setTheme } = useTheme();
-
     return null;
 
-    return (
+    /**
+     * This component is used to test the theme switcher in development.
+     * 
+     * import { useTheme } from "next-themes";
+     * 
+     * const possibleThemes = ["system", "light", "dark"];
+     * 
+     * const { theme, setTheme } = useTheme();
+     * 
+     * return (
         <div
             className="fixed bottom-0 right-0 z-50 w-12 h-12 p-3 bg-white rounded-tl-lg shadow-lg cursor-pointer dark:bg-black dark:text-white"
         >
@@ -24,5 +27,5 @@ export default function TestkitClient() {
                 Theme
             </button>
         </div>
-    );
+    );*/
 }

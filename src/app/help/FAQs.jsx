@@ -21,9 +21,7 @@ const faqs = [
     }
 ]
 
-export default function FAQs({
-
-}) {
+export default function FAQs() {
     return (
         <Card className="h-full">
             <CardHeader>

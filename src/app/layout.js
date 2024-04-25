@@ -54,6 +54,10 @@ export const metadata = {
   },
 }
 
+RootLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

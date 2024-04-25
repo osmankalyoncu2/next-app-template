@@ -2,16 +2,16 @@ import {
     next_auth_database
 } from "@/lib/database/connect";
 
-import SendEmail from "@/emails/SendEmail";
-
 export default async function deleteUser({
     userId,
 }) {
-    // TODO: This function needs to be completed after I finish the `app` schema
+    /** TODO: This function needs to be completed after I finish the `app` schema
+
+    // import SendEmail from "@/emails/SendEmail"; 
 
     // Step 0. Send an email to the user letting them know their account has been deleted
 
-    /*SendEmail({
+    SendEmail({
         "to": "user.email",
         "subject": "Your account has been deleted",
         "text": "Your account has been deleted.",

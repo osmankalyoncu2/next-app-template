@@ -1,9 +1,7 @@
 import Title from "@/components/aui/Title";
 import { auth } from "@/auth/auth";
 
-export default async function UserManagement({
-
-}) {
+export default async function UserManagement() {
     const session = await auth();
 
     return (

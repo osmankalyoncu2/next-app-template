@@ -6,9 +6,7 @@
 
 import Link from "next/link";
 
-export default function HomePage({
-
-}) {
+export default function HomePage() {
     return (
         <>
             {/* Add a better background - we don't want it to be too plain... */}
@@ -19,18 +17,13 @@ export default function HomePage({
                 <div
                     className=""
                 >
-                    <h1
-                        className="relative text-5xl text-white text-center font-bold"
-                    >
+                    <h1 className="relative text-5xl text-white text-center font-bold">
                         Make Next App
-                        <span className="absolute rounded-md bg-white/10 px-2 py-1 ml-2 text-xs font-bold">
-                            Alpha
-                        </span>
                     </h1>
                     <p
                         className="text-white text-center mt-2 text-base"
                     >
-                        The fastest way to build a product for the web.
+                        The fastest way to build a product for the web... well, almost.
                     </p>
                     <div
                         className="flex justify-center my-4 gap-x-4 text-xs"

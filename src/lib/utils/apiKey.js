@@ -3,7 +3,6 @@
 import {
     app_database
 } from '@/lib/database/connect'
-import NextError from './NextError';
 
 const crypto = require('crypto');
 
@@ -13,7 +12,7 @@ const IV_LENGTH = 16; // For AES, this is always 16
 
 export const decrypt = (encryptedApiKey) => {
     if (!ENCRYPTION_KEY || ENCRYPTION_KEY.length !== 32) {
-        throw new NextError('Invalid encryption key. Key must be 32 bytes.');
+        throw new Error('Invalid encryption key. Key must be 32 bytes.');
     }
 
     const parts = encryptedApiKey.split('_');
@@ -28,7 +27,7 @@ export const decrypt = (encryptedApiKey) => {
 
 export const encrypt = (apiKey) => {
     if (!ENCRYPTION_KEY || ENCRYPTION_KEY.length !== 32) {
-        throw new NextError('Invalid encryption key. Key must be 32 bytes.');
+        throw new Error('Invalid encryption key. Key must be 32 bytes.');
     }
 
     const iv = crypto.randomBytes(IV_LENGTH);
@@ -71,7 +70,7 @@ const removePrefix = (apiKey) => {
         };
     }
 
-    throw new NextError('Invalid API key.');
+    throw new Error('Invalid API key.');
 }
 
 export const generateApiKey = async (user_id, permissions = []) => {
@@ -90,7 +89,7 @@ export const generateApiKey = async (user_id, permissions = []) => {
         })
 
     if (error) {
-        throw new NextError('There was an error generating your API key.');
+        throw new Error('There was an error generating your API key.');
     }
 
     return {
@@ -108,7 +107,7 @@ export const whoIsApiKey = async (apiKey) => {
         .eq('user_id', user_id)
 
     if (error) {
-        throw new NextError('API key not found.');
+        throw new Error('API key not found.');
     }
 
     for (const item of data) {
@@ -122,5 +121,5 @@ export const whoIsApiKey = async (apiKey) => {
         }
     }
 
-    throw new NextError('API key not found.');
+    throw new Error('API key not found.');
 }

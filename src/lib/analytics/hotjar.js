@@ -5,9 +5,7 @@
 import Script from "next/script";
 import { AppCustomisation } from "../app/customisation";
 
-export default function Hotjar({
-    
-}) {
+export default function Hotjar() {
     // Alternatively, instead of setting an environment
     // variable, you can directly set the ID here.
     const hotjarId = AppCustomisation.tools.hotjar.hotjarId; 

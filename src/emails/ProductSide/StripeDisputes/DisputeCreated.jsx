@@ -1,8 +1,6 @@
 import * as React from 'react';
 
-export const DisputeCreatedEmail = ({
-
-}) => (
+export const DisputeCreatedEmail = () => (
     <div>
         <h1>
             Hey, there!

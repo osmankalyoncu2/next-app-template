@@ -5,9 +5,7 @@
 import Script from "next/script";
 import { AppCustomisation } from "../app/customisation";
 
-export default function MetaPixel({
-
-}) {
+export default function MetaPixel() {
     // Alternatively, instead of setting an environment
     // variable, you can directly set the ID here.
     const pixelId = AppCustomisation.tools.pixel.pixelId;

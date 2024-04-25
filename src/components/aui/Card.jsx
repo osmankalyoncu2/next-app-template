@@ -4,6 +4,11 @@ import {
     classNames
 } from "@/lib/utils/classNames";
 
+Card.propTypes = {
+    children: PropTypes.node,
+    className: PropTypes.string,
+};
+
 export default function Card({
     children,
     className = "",

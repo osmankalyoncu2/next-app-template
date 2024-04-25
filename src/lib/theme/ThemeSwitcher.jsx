@@ -20,6 +20,10 @@ import {
     AppCustomisation
 } from "@/lib/app/customisation";
 
+ThemeSwitcher.propTypes = {
+    themes: PropTypes.arrayOf(PropTypes.string)
+};
+
 export default function ThemeSwitcher({
     themes = AppCustomisation.branding.themes
 }) {

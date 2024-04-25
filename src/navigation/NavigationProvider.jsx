@@ -2,6 +2,10 @@ import { cookies } from "next/headers"
 
 import MiniNav from "./Navigation";
 
+NavigationProvider.propTypes = {
+    children: PropTypes.node
+};
+
 export default function NavigationProvider({
     children
 }) {
@@ -12,10 +16,8 @@ export default function NavigationProvider({
     const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : false;
 
     return (
-        <>
             <MiniNav defaultCollapsed={defaultCollapsed} defaultLayout={defaultLayout}>
                 {children}
             </MiniNav>
-        </>
     )
 }

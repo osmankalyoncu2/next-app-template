@@ -10,6 +10,19 @@ import {
 } from "@heroicons/react/24/outline";
 import classNames from "@/lib/utils/classNames";
 
+Search.propTypes = {
+    open: PropTypes.bool,
+    setOpen: PropTypes.func,
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string,
+            href: PropTypes.string,
+            icon: PropTypes.element,
+            keywords: PropTypes.arrayOf(PropTypes.string),
+        })
+    ),
+};
+
 export default function Search({
     open,
     setOpen = () => { },

@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 
-export default function Legal({
-
-}) {
+export default function Legal() {
     return (
         <div
             className="mt-6 w-full"

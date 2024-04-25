@@ -4,6 +4,11 @@
 
 import { cn } from "@/lib/utils/utils";
 
+Spinner.propTypes = {
+    color: PropTypes.string,
+    className: PropTypes.string,
+};
+
 export default function Spinner({
     color = "text-white",
     className = ""

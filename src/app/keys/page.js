@@ -37,9 +37,7 @@ export const columns = [
 // - Who should see what this key is up to
 // - Permissions
 
-export default function APIKeysPage({
-
-}) {
+export default function APIKeysPage() {
     return (
         <>
             <Title
