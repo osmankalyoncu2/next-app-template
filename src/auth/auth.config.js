@@ -71,8 +71,6 @@ async function checkForUserDeletion(user) {
                 id
             ])
     }
-
-    return;
 }
 
 async function configureAppForUser(user) {
@@ -125,8 +123,6 @@ async function configureAppForUser(user) {
             })
             .eq('user_id', user.id)
     }
-
-    return;
 }
 
 export function checkPathnamesValid() {
@@ -203,8 +199,8 @@ const authConfig = {
             return session;
         },
         async jwt({ token, user, newUser, trigger, session = null }) {
-            const isSignIn = (user) ? true : false;
-            const isNewUser = (newUser) ? true : false;
+            const isSignIn = Boolean(user);
+            const isNewUser = Boolean(newUser);
 
             if (isSignIn) {
                 await configureAppForUser(user);
@@ -225,7 +221,7 @@ const authConfig = {
                 token.newUser = false;
             }
 
-            if(trigger === "update" && session?.name) {
+            if (trigger === "update" && session?.name) {
                 token.name = session.name;
                 await next_auth_database
                     .from('users')

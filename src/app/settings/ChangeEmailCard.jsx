@@ -7,7 +7,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -18,7 +17,7 @@ import {
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
-  } from "@/components/ui/tooltip"
+} from "@/components/ui/tooltip"
 
 function isEmailOkay({ currentEmail, newEmail }) {
     // regex to check if email is valid
@@ -28,17 +27,11 @@ function isEmailOkay({ currentEmail, newEmail }) {
     }
 
     // check if email is different
-    if (currentEmail === newEmail) {
-        return false;
-    }
-
-    return true;
+    return currentEmail !== newEmail;
 }
 
-export default function ChangeEmailCard({
-
-}) {
-    const { data: session, status } = useSession();
+export default function ChangeEmailCard() {
+    const { data: session } = useSession();
     const [newEmail, setNewEmail] = useState("");
     const [emailIsOkay, setEmailIsOkay] = useState(false);
 

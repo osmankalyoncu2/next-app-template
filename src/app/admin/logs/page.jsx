@@ -1,9 +1,7 @@
 import Title from "@/components/aui/Title";
 import ViewLogs from "./ViewLogs";
 
-export default async function AppLogs({
-
-}) {
+export default async function AppLogs() {
     return (
         <>
             <Title

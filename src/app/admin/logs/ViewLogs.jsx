@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function ViewLogs({ }) {
-    const [currentPage, setCurrentPage] = useState(1);
+export default function ViewLogs() {
     const [logs, setLogs] = useState([]);
 
     useEffect(() => {
@@ -23,10 +22,8 @@ export default function ViewLogs({ }) {
     // TODO: Complete the Logs stuff
 
     return (
-        <>
-            <pre>
-                {JSON.stringify(logs, null, 2)}
-            </pre>
-        </>
+        <pre>
+            {JSON.stringify(logs, null, 2)}
+        </pre>
     )
 }

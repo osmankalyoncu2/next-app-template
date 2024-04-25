@@ -4,12 +4,10 @@ import { NextResponse } from "next/server";
 
 import {
     app_database,
-    next_auth_database,
 } from "@/lib/database/connect";
 
 import withTrace from "@/lib/logging/usetrace";
 import { auth } from "@/auth/auth";
-import NextError from "@/lib/utils/NextError";
 
 async function requestUserDeletion(
     req
@@ -80,8 +78,7 @@ async function requestUserDeletion(
         });
 
     if (error_adding_scheduled_task) {
-        // NextError extends Error constructor.
-        throw new NextError(error_adding_scheduled_task);
+        throw new Error(error_adding_scheduled_task);
     }
 
     // Step 2. Send an email to the user letting them know their account has been scheduled for deletion
@@ -109,101 +106,96 @@ async function requestUserDeletion(
 const updatable_details = {};
 
 async function updateUserDetails(req) {
-    // Method for a user to update their details
-
     const user = await auth();
 
     if (!user) {
         return NextResponse.json(
             {
-                "status": "error",
-                "message": "You must be logged in to update your account.",
+                status: "error",
+                message: "You must be logged in to update your account.",
             },
-            {
-                status: 401,
-            }
-        )
+            { status: 401 }
+        );
     }
 
-    // Step 0. Check that the user has provided the correct details
     const { data } = await req.json();
-
     const errors = [];
 
+    // Check for valid updatable keys
     for (const [key, value] of Object.entries(data)) {
         if (!updatable_details[key]) {
             errors.push({
-                "key": key,
-                "message": "This key is not updatable.",
+                key: key,
+                message: "This key is not updatable.",
             });
-        } else {
-            if (typeof value !== updatable_details[key].type) {
-                errors.push({
-                    "key": key,
-                    "message": "This key is not of the correct type.",
-                });
-            } else {
-                if (value.length < updatable_details[key].minLength) {
-                    errors.push({
-                        "key": key,
-                        "message": "This key is too short.",
-                    });
-                } else if (value.length > updatable_details[key].maxLength) {
-                    errors.push({
-                        "key": key,
-                        "message": "This key is too long.",
-                    });
-                }
-            }
+            continue;  // Move to next iteration if the key is not updatable
+        }
+
+        // Validate the type
+        if (typeof value !== updatable_details[key].type) {
+            errors.push({
+                key: key,
+                message: "This key is not of the correct type.",
+            });
+            continue;
+        }
+
+        // Validate length constraints
+        const { minLength, maxLength } = updatable_details[key];
+        if (value.length < minLength) {
+            errors.push({
+                key: key,
+                message: "This key is too short.",
+            });
+        } else if (value.length > maxLength) {
+            errors.push({
+                key: key,
+                message: "This key is too long.",
+            });
         }
 
         if (errors.length > 0) {
             return NextResponse.json(
                 {
-                    "status": "error",
-                    "message": "There were errors with your request.",
-                    "errors": errors,
+                    status: "error",
+                    message: "There were errors with your request.",
+                    errors: errors,
                 },
-                {
-                    status: 400,
-                }
+                { status: 400 }
             );
         }
 
-        // Step 1. Update the user's details
+        // Update the user's details
         const { error } = await updatable_details[key].function(value, user.user.id);
 
         if (error) {
             return NextResponse.json(
                 {
-                    "status": "error",
-                    "message": "There was an error updating your details.",
+                    status: "error",
+                    message: "There was an error updating your details.",
                 },
-                {
-                    status: 500,
-                }
+                { status: 500 }
             );
         }
+    }
 
-        // Step 2. Return a success message
+    if (errors.length === 0) {
         return NextResponse.json(
             {
-                "status": "success",
-                "message": "Your details have been updated.",
+                status: "success",
+                message: "Your details have been updated.",
             },
-            {
-                status: 200,
-            }
+            { status: 200 }
         );
     }
 
+    // Fallback return statement, should not be reached
     return NextResponse.json(
         {
-            message: "This should never happen.",
+            status: "error",
+            message: "Unexpected behavior.",
         },
-        {
-            status: 200,
-        }
+        { status: 500 }
     );
 }
 

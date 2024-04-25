@@ -1,11 +1,7 @@
 import Title from "@/components/aui/Title";
-import { auth } from "@/auth/auth";
 import Test from "./Test";
 
-export default async function AppConfiguration({
-
-}) {
-    const session = await auth();
+export default async function AppConfiguration() {
 
     return (
         <>

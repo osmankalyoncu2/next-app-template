@@ -37,7 +37,7 @@ export async function GET() {
             continue;
         }
 
-        const { data: save_data, error: error_saving } = await app_database
+        const { error: error_saving } = await app_database
             .from('analytics')
             .insert(
                 {
@@ -82,7 +82,7 @@ async function getUserCount() {
 
     // Note: head is set to true so that we only get the count and not the data
     // Count is stored in the `count` property
-    const { count: new_count, error: error } = await next_auth_database
+    const { count: new_count, error } = await next_auth_database
         .from('users')
         .select('*', { count: 'exact', head: true })
 

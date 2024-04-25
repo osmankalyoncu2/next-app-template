@@ -7,9 +7,7 @@ import {
 	ChevronLeftIcon
 } from "@heroicons/react/20/solid";
 
-export default function FourOhFour({
-
-}) {
+export default function FourOhFour() {
     return (
         <main
             className="bg-primary-950 h-screen w-screen z-50"

@@ -4,6 +4,14 @@
 
 import { cn } from "@/lib/utils/utils";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
+Spinner.propTypes = {
+    color: PropTypes.string,
+    className: PropTypes.string,
+};
+
 export default function Spinner({
     color = "text-white",
     className = ""

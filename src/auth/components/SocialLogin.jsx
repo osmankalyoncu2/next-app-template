@@ -3,8 +3,16 @@
 import Spinner from "@/components/aui/Loader";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import { useState } from "react";
+
+// Prop Types
+import PropTypes from 'prop-types'
+
+SocialLoginProviders.propTypes = {
+    type: PropTypes.string,
+    csrfToken: PropTypes.string,
+    providers: PropTypes.object
+};
 
 export default function SocialLoginProviders({
     type = "Continue",
@@ -59,7 +67,14 @@ export default function SocialLoginProviders({
                                 <div
                                     className="flex flex-row justify-center items-center w-full h-full"
                                 >
-                                    {getProviderLogo(provider.id)}
+                                    <Image
+                                        loading="lazy"
+                                        height={20}
+                                        width={20}
+                                        alt="provider-logo"
+                                        className="inline-block h-full"
+                                        src={`https://authjs.dev/img/providers/${provider.id}.svg`}
+                                    />
                                     <span className="ml-2 text-secondary-foreground font-semibold text-sm">
                                         {type} with {provider.name}
                                     </span>
@@ -71,26 +86,4 @@ export default function SocialLoginProviders({
             </div>
         </>
     )
-}
-
-function getProviderLogo(providerId) {
-    // TODO: Add support for when the theme changes after the component has been rendered
-    return (
-        <Image
-            loading="lazy"
-            height={20}
-            width={20}
-            alt="provider-logo"
-            className="inline-block h-full"
-            src={"https://authjs.dev/img/providers/" + providerId + "-dark.svg"}
-            onError={(e) => {
-                // if src is -dark.svg, try again with .svg
-                if (e.target.src.includes("-dark.svg")) {
-                    e.target.src = "https://authjs.dev/img/providers/" + providerId + ".svg";
-                } else {
-                    
-                }
-            }}
-        />
-    );
 }

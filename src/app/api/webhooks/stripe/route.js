@@ -8,12 +8,6 @@ import { NextResponse } from 'next/server'
 // Stripe Library
 import { stripe } from '@/lib/stripe/stripe'
 
-// Database Connection
-import {
-    app_database,
-    next_auth_database,
-} from "@/lib/database/connect";
-
 export async function POST(req) {
     let event
 

@@ -13,7 +13,7 @@ export async function POST(req) {
 
     const session = await auth();
 
-    if (!session || !session.user) {
+    if (!session?.user) {
         return NextResponse.json({ message: 'No session or user found' }, { status: 401 })
     }
 

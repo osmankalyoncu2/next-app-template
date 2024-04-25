@@ -7,7 +7,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -25,16 +24,12 @@ import { toast } from "sonner";
 
 function isNameOkay({ currentName, newName }) {
     if (newName.length === 0) return false;
-    // check if name is different
-    if (currentName === newName) return false;
 
-    return true;
+    return currentName !== newName;
 }
 
-export default function ChangeNameCard({
-
-}) {
-    const { data: session, status, update } = useSession();
+export default function ChangeNameCard() {
+    const { data: session, update } = useSession();
     const [newName, setNewName] = useState("");
     const [nameIsOkay, setNameIsOkay] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);

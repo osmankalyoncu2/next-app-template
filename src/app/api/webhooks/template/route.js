@@ -11,7 +11,15 @@ export function POST(req) {
         return NextResponse.error(error);
     }
 
-    return NextResponse.next()
+    return NextResponse.json(
+        {
+            message: "Webhook received",
+            event: event
+        },
+        {
+            status: 200
+        }
+    );
 }
 
 // Webhook routes are usually POST requests - if you need another method, find the documentation here -> https://nextjs.org/docs/app/building-your-application/routing/route-handlers

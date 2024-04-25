@@ -38,5 +38,5 @@ export async function submitForm(event) {
         window.location.href = "/verify";
     }
 
-    return false;
+    return true;
 };

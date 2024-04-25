@@ -15,6 +15,14 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+// Prop Types
+import PropTypes from 'prop-types'
+
+KeyTable.propTypes = {
+    columns: PropTypes.array.isRequired,
+    data: PropTypes.array.isRequired,
+};
+
 export function KeyTable({
     columns,
     data,

@@ -5,9 +5,7 @@ export const metadata = {
 import { auth } from "@/auth/auth";
 import Title from "@/components/aui/Title";
 
-export default async function Dashboard({
-
-}) {
+export default async function Dashboard() {
     const session = await auth();
 
     return (

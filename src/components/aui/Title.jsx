@@ -1,5 +1,13 @@
 "use client";
 
+// Prop Types
+import PropTypes from 'prop-types'
+
+Title.propTypes = {
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+};
+
 export default function Title({
     title,
     subtitle = null,

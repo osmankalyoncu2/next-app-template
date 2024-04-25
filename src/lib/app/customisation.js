@@ -67,7 +67,6 @@ export const AppCustomisation = {
             href: '/admin',
             icon: AdjustmentsHorizontalIcon,
         },
-        // TODO: Add more admin pages here such as `/admin/users` and `/admin/analytics`.
     ],
     marketing_pages: marketingPages,
     settings: {

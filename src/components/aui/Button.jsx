@@ -5,8 +5,18 @@
 "use client";
 
 import { classNames } from "@/lib/utils/classNames";
-import { useState } from "react";
-import Spinner from "./Loader";
+
+// Prop Types
+import PropTypes from 'prop-types'
+
+Button.propTypes = {
+    children: PropTypes.node,
+    disabled: PropTypes.bool,
+    onClick: PropTypes.func,
+    variant: PropTypes.oneOf(["default", "danger"]),
+    className: PropTypes.string,
+    smaller: PropTypes.bool
+};
 
 export default function Button({
     children,
@@ -17,7 +27,6 @@ export default function Button({
     smaller = false,
     ...props
 }) {
-    const [loading, setLoading] = useState(false);
     let scheme;
     let size;
 
@@ -41,20 +50,11 @@ export default function Button({
                 size,
                 className
             )}
-            onClick={async (e) => {
-                setLoading(true);
-                await onClick(e);
-                setLoading(false);
-            }}
+            onClick={onClick}
             disabled={disabled || loading}
             {...props}
         >
             {children}
-            {loading && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <Spinner color="text-red-50" />
-                </div>
-            )}
         </button>
     )
 }

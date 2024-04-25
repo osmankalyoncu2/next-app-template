@@ -11,9 +11,7 @@ import SettingsTitle from "./SettingsTitle";
 import SignoutCard from "./SignoutCard";
 import ChangeNameCard from "./ChangeNameCard";
 
-export default function SettingsPage({
-
-}) {
+export default function SettingsPage() {
     return (
         <main>
             <SettingsTitle />
