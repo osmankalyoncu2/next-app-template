@@ -19,7 +19,7 @@ export const decrypt = (encryptedApiKey) => {
     const parts = encryptedApiKey.split('_');
     const iv = Buffer.from(parts.shift(), 'hex');
     const encryptedText = Buffer.from(parts.join('_'), 'hex');
-    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
+    const decipher = crypto.createDecipheriv('aes-256-gcm', Buffer.from(ENCRYPTION_KEY), iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
 
@@ -32,7 +32,7 @@ export const encrypt = (apiKey) => {
     }
 
     const iv = crypto.randomBytes(IV_LENGTH);
-    const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(ENCRYPTION_KEY), iv);
+    const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.from(ENCRYPTION_KEY), iv);
     let encrypted = cipher.update(apiKey);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
 
@@ -111,8 +111,8 @@ export const whoIsApiKey = async (apiKey) => {
         throw new NextError('API key not found.');
     }
 
-    for (let i = 0; i < data.length; i++) {
-        const encryptedApiKey = data[i].encrypted_key;
+    for (const item of data) {
+        const encryptedApiKey = item.encrypted_key;
         const decryptedApiKey = decrypt(encryptedApiKey);
 
         if (decryptedApiKey === secret) {
